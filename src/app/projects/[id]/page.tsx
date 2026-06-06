@@ -9,7 +9,7 @@ import { useProjectStore } from '@/stores/project-store'
 import { useMemberStore } from '@/stores/member-store'
 import { useTaskStore } from '@/stores/task-store'
 import Link from 'next/link'
-import { ChevronRight, Calendar, User, ListChecks, Clock, CheckCircle2, Circle, ArrowUpRight } from 'lucide-react'
+import { ChevronRight, Calendar, User, ListChecks, CheckCircle2 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const priorityDot: Record<string, string> = {
@@ -17,15 +17,6 @@ const priorityDot: Record<string, string> = {
   medium: 'bg-amber-500',
   low: 'bg-green-500',
 }
-
-const timelineEvents = [
-  { date: '2026-03-01', title: '项目启动', desc: '项目正式立项，确定技术方案', done: true },
-  { date: '2026-04-01', title: '需求评审', desc: '完成需求文档评审和确认', done: true },
-  { date: '2026-05-01', title: '设计完成', desc: 'UI 设计稿通过评审', done: true },
-  { date: '2026-06-15', title: '核心开发', desc: '完成核心功能模块开发', done: false },
-  { date: '2026-07-15', title: '测试验收', desc: '功能测试和 Bug 修复', done: false },
-  { date: '2026-07-31', title: '项目上线', desc: '部署上线并交付', done: false },
-]
 
 export default function ProjectDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params)
@@ -64,7 +55,6 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
           <TabsTrigger value="overview">概览</TabsTrigger>
           <TabsTrigger value="tasks">任务列表</TabsTrigger>
           <TabsTrigger value="members">成员</TabsTrigger>
-          <TabsTrigger value="timeline">时间线</TabsTrigger>
         </TabsList>
 
         {/* 概览 */}
@@ -178,34 +168,6 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
           </div>
         </TabsContent>
 
-        {/* 时间线 */}
-        <TabsContent value="timeline">
-          <div className="relative max-w-2xl mx-auto">
-            <div className="absolute left-1/2 -translate-x-px top-0 bottom-0 w-0.5 bg-gray-200" />
-            {timelineEvents.map((event, i) => (
-              <div key={i} className={cn('relative flex mb-8', i % 2 === 0 ? 'flex-row' : 'flex-row-reverse')}>
-                <div className={cn('w-1/2 px-4', i % 2 === 0 ? 'text-right' : 'text-left')}>
-                  <Card className="inline-block border-gray-200">
-                    <CardContent className="p-4">
-                      <p className="text-xs text-gray-400 mb-1">{event.date}</p>
-                      <p className="font-semibold text-gray-800">{event.title}</p>
-                      <p className="text-sm text-gray-500 mt-1">{event.desc}</p>
-                    </CardContent>
-                  </Card>
-                </div>
-                <div className="absolute left-1/2 -translate-x-1/2 w-8 h-8 rounded-full border-2 border-white flex items-center justify-center z-10"
-                  style={{ top: '12px' }}>
-                  {event.done ? (
-                    <CheckCircle2 size={20} className="text-green-500" />
-                  ) : (
-                    <Circle size={20} className="text-gray-300" />
-                  )}
-                </div>
-                <div className="w-1/2" />
-              </div>
-            ))}
-          </div>
-        </TabsContent>
       </Tabs>
     </div>
   )
