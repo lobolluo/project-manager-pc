@@ -1,94 +1,116 @@
-# {{项目名}} - 接口文档
+# ProjectFlow - 接口文档
 
 ## 基本信息
 
 | 项目 | 内容 |
 |------|------|
-| Base URL | `http://localhost:{{端口}}` |
-| 认证方式 | Bearer Token (JWT) |
-| 响应格式 | JSON |
+| 应用类型 | 纯前端 SPA（无后端 API） |
+| 数据存储 | localStorage |
+| 数据格式 | JSON |
 
 ---
 
-## 通用响应格式
+## 数据结构说明
 
-### 成功响应
+本项目为纯前端应用，所有数据通过 localStorage 持久化，使用 Zustand persist 中间件管理。
 
-```json
-{
-  "code": 0,
-  "message": "success",
-  "data": {}
-}
-```
+### Storage Keys
 
-### 错误响应
-
-```json
-{
-  "code": 40001,
-  "message": "错误描述",
-  "data": null
-}
-```
-
-### 错误码定义
-
-| 错误码 | 含义 |
-|--------|------|
-| 0 | 成功 |
-| 40001 | 参数错误 |
-| 40101 | 未认证 |
-| 40301 | 无权限 |
-| 50001 | 服务端错误 |
+| Key | 类型 | 说明 |
+|-----|------|------|
+| `project-flow-projects` | IProject[] | 项目列表 |
+| `project-flow-tasks` | ITask[] | 任务列表 |
+| `project-flow-members` | IMember[] | 成员列表 |
+| `project-flow-settings` | ISettings | 用户设置 |
 
 ---
 
-## 认证模块
+## 数据接口（Zustand Store）
 
-### POST /auth/login
+### Project Store
 
-登录接口
-
-**请求参数**：
-
-| 字段 | 类型 | 必填 | 说明 |
+| 方法 | 说明 | 参数 | 返回 |
 |------|------|------|------|
-| phone | string | 是 | 手机号 |
-| password | string | 是 | 密码 |
+| `getProjects()` | 获取所有项目 | - | IProject[] |
+| `getProjectById(id)` | 获取单个项目 | id: string | IProject \| undefined |
+| `addProject(project)` | 创建项目 | IProject | void |
+| `updateProject(id, data)` | 更新项目 | id, Partial<IProject> | void |
+| `deleteProject(id)` | 删除项目 | id: string | void |
 
-**响应示例**：
+### Task Store
 
-```json
-{
-  "code": 0,
-  "data": {
-    "token": "xxx",
-    "user": {}
+| 方法 | 说明 | 参数 | 返回 |
+|------|------|------|------|
+| `getTasks()` | 获取所有任务 | - | ITask[] |
+| `getTasksByProject(projectId)` | 按项目筛选 | projectId: string | ITask[] |
+| `getTasksByStatus(status)` | 按状态筛选 | status: TStatus | ITask[] |
+| `addTask(task)` | 创建任务 | ITask | void |
+| `updateTask(id, data)` | 更新任务 | id, Partial<ITask> | void |
+| `deleteTask(id)` | 删除任务 | id: string | void |
+| `moveTask(id, status)` | 移动任务状态 | id, TStatus | void |
+
+### Settings Store
+
+| 方法 | 说明 | 参数 | 返回 |
+|------|------|------|------|
+| `getSettings()` | 获取设置 | - | ISettings |
+| `updateSettings(data)` | 更新设置 | Partial<ISettings> | void |
+
+---
+
+## 类型定义
+
+```typescript
+type TStatus = 'todo' | 'in-progress' | 'done'
+type TPriority = 'high' | 'medium' | 'low'
+type TRole = 'manager' | 'developer' | 'designer' | 'tester'
+
+interface IProject {
+  id: string
+  name: string
+  description: string
+  status: 'active' | 'completed' | 'archived'
+  progress: number
+  startDate: string
+  endDate: string
+  ownerId: string
+  memberIds: string[]
+}
+
+interface ITask {
+  id: string
+  title: string
+  description?: string
+  status: TStatus
+  priority: TPriority
+  projectId: string
+  assigneeId: string
+  dueDate: string
+  tags: string[]
+  createdAt: string
+  updatedAt: string
+}
+
+interface IMember {
+  id: string
+  name: string
+  email: string
+  role: TRole
+  avatar?: string
+}
+
+interface ISettings {
+  username: string
+  email: string
+  role: string
+  notifications: {
+    email: boolean
+    taskAssignment: boolean
+    deadline: boolean
+    projectUpdate: boolean
   }
-}
-```
-
----
-
-## {{模块名}}
-
-### GET /{{路径}}
-
-{{接口描述}}
-
-**请求参数**：
-
-| 字段 | 类型 | 必填 | 说明 |
-|------|------|------|------|
-| ... | ... | ... | ... |
-
-**响应示例**：
-
-```json
-{
-  "code": 0,
-  "data": {}
+  theme: 'light' | 'dark' | 'system'
+  language: 'zh-CN' | 'en-US'
 }
 ```
 
@@ -98,4 +120,4 @@
 
 | 日期 | 接口 | 变更类型 | 说明 |
 |------|------|----------|------|
-| ... | ... | 新增/修改/废弃 | ... |
+| 2026-06-06 | 全部 | 新增 | 初始化数据模型和 Store 接口 |
