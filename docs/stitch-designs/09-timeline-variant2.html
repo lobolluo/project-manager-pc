@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ProStream - 前端重构项目 - 时间线</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fc;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background-color: #e1e4e8;
+            z-index: 0;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-variant": "#e0e3e6",
+                      "surface-container-highest": "#e0e3e6",
+                      "on-error-container": "#93000a",
+                      "on-primary-fixed-variant": "#254583",
+                      "tertiary": "#00447d",
+                      "on-primary-fixed": "#001944",
+                      "outline-variant": "#c4c6d2",
+                      "tertiary-fixed": "#d4e3ff",
+                      "tertiary-fixed-dim": "#a4c9ff",
+                      "surface-tint": "#3f5d9c",
+                      "inverse-primary": "#afc6ff",
+                      "background": "#f7f9fc",
+                      "surface": "#f7f9fc",
+                      "inverse-on-surface": "#eff1f4",
+                      "surface-bright": "#f7f9fc",
+                      "surface-container-high": "#e6e8eb",
+                      "on-tertiary-fixed": "#001c39",
+                      "secondary": "#4e6073",
+                      "on-surface": "#191c1e",
+                      "surface-container": "#eceef1",
+                      "on-background": "#191c1e",
+                      "surface-dim": "#d8dadd",
+                      "secondary-fixed": "#d1e4fb",
+                      "primary-fixed": "#d9e2ff",
+                      "outline": "#747781",
+                      "secondary-container": "#cfe2f9",
+                      "on-tertiary-fixed-variant": "#004883",
+                      "on-tertiary-container": "#b9d5ff",
+                      "tertiary-container": "#005ca5",
+                      "surface-container-lowest": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "error": "#ba1a1a",
+                      "on-secondary-container": "#526478",
+                      "on-secondary-fixed": "#091d2e",
+                      "surface-container-low": "#f2f4f7",
+                      "primary": "#21417f",
+                      "on-tertiary": "#ffffff",
+                      "on-surface-variant": "#444650",
+                      "on-secondary-fixed-variant": "#36485b",
+                      "on-secondary": "#ffffff",
+                      "primary-fixed-dim": "#afc6ff",
+                      "on-error": "#ffffff",
+                      "secondary-fixed-dim": "#b5c8df",
+                      "on-primary": "#ffffff",
+                      "primary-container": "#3b5998",
+                      "on-primary-container": "#c2d2ff",
+                      "inverse-surface": "#2d3133"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "xl": "32px",
+                      "gutter": "20px",
+                      "sm": "8px",
+                      "base": "4px",
+                      "margin-desktop": "32px",
+                      "margin-mobile": "16px",
+                      "2xl": "48px",
+                      "md": "16px",
+                      "lg": "24px",
+                      "xs": "4px"
+              },
+              "fontFamily": {
+                      "headline-xl": ["Inter"],
+                      "body-md": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "headline-xl-mobile": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "body-sm": ["Inter"],
+                      "label-md": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "headline-lg-mobile": ["Inter"]
+              },
+              "fontSize": {
+                      "headline-xl": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "headline-xl-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                      "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "body-sm": ["12px", {"lineHeight": "18px", "fontWeight": "400"}],
+                      "label-md": ["13px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "headline-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "headline-lg-mobile": ["22px", {"lineHeight": "28px", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+      </script>
+</head>
+<body class="bg-background text-on-surface">
+<!-- SideNavBar Shell -->
+<aside class="flex flex-col h-screen fixed left-0 top-0 border-r border-outline-variant bg-surface-container w-[260px] z-50">
+<div class="px-6 py-8 flex flex-col gap-1">
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Acme Corp</h1>
+<p class="font-label-md text-label-md text-secondary opacity-80">Enterprise Plan</p>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-secondary hover:bg-surface-container-high transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined text-secondary group-hover:text-primary" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary hover:bg-surface-container-high transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined text-secondary group-hover:text-primary" data-icon="view_kanban">view_kanban</span>
+<span class="font-label-md text-label-md">Kanban Board</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-primary-container bg-primary-container rounded-lg border-l-4 border-primary shadow-sm" href="#">
+<span class="material-symbols-outlined" data-icon="folder_open" style="font-variation-settings: 'FILL' 1;">folder_open</span>
+<span class="font-label-md text-label-md">Projects</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary hover:bg-surface-container-high transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined text-secondary group-hover:text-primary" data-icon="groups">groups</span>
+<span class="font-label-md text-label-md">Team</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary hover:bg-surface-container-high transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined text-secondary group-hover:text-primary" data-icon="settings">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</nav>
+<div class="p-4 mb-4">
+<button class="w-full bg-primary text-on-primary py-3 rounded-xl font-label-md text-label-md flex items-center justify-center gap-2 hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+                New Project
+            </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-[260px] min-h-screen flex flex-col">
+<!-- TopAppBar Shell -->
+<header class="flex justify-between items-center w-full px-8 py-4 sticky top-0 z-40 bg-surface-container-lowest border-b border-outline-variant shadow-sm">
+<div class="flex items-center gap-8">
+<div class="font-headline-md text-headline-md font-bold text-primary">ProStream</div>
+<div class="hidden md:flex items-center gap-6">
+<a class="font-body-md text-body-md text-secondary hover:text-primary transition-colors" href="#">Overview</a>
+<a class="font-body-md text-body-md text-secondary hover:text-primary transition-colors" href="#">Task List</a>
+<a class="font-body-md text-body-md text-secondary hover:text-primary transition-colors" href="#">Members</a>
+<a class="font-body-md text-body-md text-primary font-bold border-b-2 border-primary pb-1" href="#">Timeline</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative group">
+<span class="material-symbols-outlined text-secondary p-2 rounded-full hover:bg-surface-container-high cursor-pointer transition-colors" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</div>
+<span class="material-symbols-outlined text-secondary p-2 rounded-full hover:bg-surface-container-high cursor-pointer transition-colors" data-icon="help">help</span>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant bg-surface-container cursor-pointer active:opacity-80 transition-opacity">
+<img alt="User Profile Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMmsbJjKC7ZDZXijXeuMb4IHs8l7PxfizRYmjxRn6fStSFSDhcnwOr2_Mc24lZO-kX2RyOmC05R8pBfsahny64m1CUX9Ol1iTPBywSXiP9WnSxRx6SiGTutSdecaQOgPZnEO3dT_P6OeQBHmacyNfneNGSi3vqFKeC30xvLuI3lRoKty2MXUdKmisri1gVfhml24-ZFAkjEbraPzfwTYTaaXLsHyI0YgkSF1iNPdpjIidEAaG6-_1r58ZQwLwjEYWgE8I03TjFbDg"/>
+</div>
+</div>
+</header>
+<!-- Page Header / Breadcrumb -->
+<div class="px-8 py-6 bg-surface-container-low/50">
+<nav class="flex items-center gap-2 text-secondary mb-2">
+<span class="font-body-sm text-body-sm hover:text-primary cursor-pointer">Projects</span>
+<span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">前端重构项目</span>
+</nav>
+<div class="flex items-center justify-between">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">前端重构项目</h2>
+<div class="flex gap-2">
+<button class="px-4 py-2 bg-surface-container-lowest border border-outline-variant rounded-lg text-secondary font-label-md text-label-md hover:bg-white transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="share">share</span>
+                        Share
+                    </button>
+<button class="px-4 py-2 bg-primary text-on-primary rounded-lg font-label-md text-label-md hover:opacity-90 transition-opacity flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="edit">edit</span>
+                        Edit Project
+                    </button>
+</div>
+</div>
+</div>
+<!-- Timeline Section -->
+<div class="flex-1 px-8 py-12 bg-background">
+<div class="max-w-5xl mx-auto relative timeline-line">
+<!-- Milestone 1 (Right) -->
+<div class="relative flex items-center justify-between mb-24 w-full">
+<div class="w-[45%]"></div>
+<div class="absolute left-1/2 -translate-x-1/2 z-10 w-10 h-10 rounded-full bg-primary flex items-center justify-center border-4 border-background">
+<span class="material-symbols-outlined text-on-primary text-xl" data-icon="check" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div class="w-[45%] bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-shadow group">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-md text-label-md text-primary">2024-10-01</span>
+<span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-[10px] font-bold uppercase">Completed</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">项目启动</h3>
+<p class="font-body-md text-body-md text-secondary">
+                            正式确立前端重构目标，组建核心团队，并完成初步的资源分配与需求调研。
+                        </p>
+</div>
+</div>
+<!-- Milestone 2 (Left) -->
+<div class="relative flex items-center justify-between mb-24 w-full">
+<div class="w-[45%] bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-shadow text-right">
+<div class="flex items-center justify-between mb-2 flex-row-reverse">
+<span class="font-label-md text-label-md text-primary">2024-11-15</span>
+<span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-[10px] font-bold uppercase">Completed</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">架构设计评审</h3>
+<p class="font-body-md text-body-md text-secondary">
+                            基于微前端理念的全新架构方案通过技术委员会评审，确定技术栈为 React + Vite + Tailwind。
+                        </p>
+</div>
+<div class="absolute left-1/2 -translate-x-1/2 z-10 w-10 h-10 rounded-full bg-primary flex items-center justify-center border-4 border-background">
+<span class="material-symbols-outlined text-on-primary text-xl" data-icon="check" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div class="w-[45%]"></div>
+</div>
+<!-- Milestone 3 (Right) -->
+<div class="relative flex items-center justify-between mb-24 w-full">
+<div class="w-[45%]"></div>
+<div class="absolute left-1/2 -translate-x-1/2 z-10 w-12 h-12 rounded-full bg-primary-container flex items-center justify-center border-4 border-background animate-pulse">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="sync">sync</span>
+</div>
+<div class="w-[45%] bg-white p-6 rounded-xl border-2 border-primary shadow-lg ring-4 ring-primary/5">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-md text-label-md text-primary font-bold">2024-12-20</span>
+<span class="px-2 py-0.5 bg-primary/10 text-primary rounded text-[10px] font-bold uppercase">In Progress</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Alpha 版本发布</h3>
+<p class="font-body-md text-body-md text-secondary">
+                            核心业务流程迁移完成，进入内部小范围试运行阶段，重点修复阻碍性 Bug。
+                        </p>
+<div class="mt-4 h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[65%] rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Milestone 4 (Left) -->
+<div class="relative flex items-center justify-between mb-24 w-full">
+<div class="w-[45%] bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-shadow text-right">
+<div class="flex items-center justify-between mb-2 flex-row-reverse">
+<span class="font-label-md text-label-md text-secondary opacity-60">2025-01-10</span>
+<span class="px-2 py-0.5 bg-surface-variant text-secondary rounded text-[10px] font-bold uppercase">Upcoming</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">核心组件库完成</h3>
+<p class="font-body-md text-body-md text-secondary">
+                            完成 UI 组件库的标准化封装，提供完整的单元测试覆盖和组件文档。
+                        </p>
+</div>
+<div class="absolute left-1/2 -translate-x-1/2 z-10 w-10 h-10 rounded-full bg-surface-container border-4 border-background flex items-center justify-center">
+<div class="w-3 h-3 rounded-full bg-outline"></div>
+</div>
+<div class="w-[45%]"></div>
+</div>
+<!-- Milestone 5 (Right) -->
+<div class="relative flex items-center justify-between mb-24 w-full">
+<div class="w-[45%]"></div>
+<div class="absolute left-1/2 -translate-x-1/2 z-10 w-10 h-10 rounded-full bg-surface-container border-4 border-background flex items-center justify-center">
+<div class="w-3 h-3 rounded-full bg-outline"></div>
+</div>
+<div class="w-[45%] bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-shadow group">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-md text-label-md text-secondary opacity-60">2025-02-15</span>
+<span class="px-2 py-0.5 bg-surface-variant text-secondary rounded text-[10px] font-bold uppercase">Planned</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Beta 测试开始</h3>
+<p class="font-body-md text-body-md text-secondary">
+                            向全公司范围开放 Beta 访问权限，收集真实业务反馈，进行性能调优。
+                        </p>
+</div>
+</div>
+<!-- Milestone 6 (Left) -->
+<div class="relative flex items-center justify-between mb-12 w-full">
+<div class="w-[45%] bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-shadow text-right">
+<div class="flex items-center justify-between mb-2 flex-row-reverse">
+<span class="font-label-md text-label-md text-secondary opacity-60">2025-03-30</span>
+<span class="px-2 py-0.5 bg-surface-variant text-secondary rounded text-[10px] font-bold uppercase">Target</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">正式上线</h3>
+<p class="font-body-md text-body-md text-secondary">
+                            完成全量灰度发布，旧系统正式下线，项目进入维护期。
+                        </p>
+</div>
+<div class="absolute left-1/2 -translate-x-1/2 z-10 w-10 h-10 rounded-full bg-surface-container border-4 border-background flex items-center justify-center">
+<span class="material-symbols-outlined text-outline text-xl" data-icon="rocket_launch">rocket_launch</span>
+</div>
+<div class="w-[45%]"></div>
+</div>
+</div>
+</div>
+</main>
+<!-- Background Decorative Elements -->
+<div class="fixed top-0 left-0 w-full h-full -z-10 pointer-events-none overflow-hidden opacity-20">
+<div class="absolute top-[-10%] right-[-5%] w-[400px] h-[400px] bg-primary/10 rounded-full blur-[100px]"></div>
+<div class="absolute bottom-[5%] left-[20%] w-[300px] h-[300px] bg-tertiary/10 rounded-full blur-[80px]"></div>
+</div>
+<script>
+        // Micro-interaction for timeline cards
+        document.querySelectorAll('.bg-surface-container-lowest').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.classList.add('translate-y-[-4px]');
+            });
+            card.addEventListener('mouseleave', () => {
+                card.classList.remove('translate-y-[-4px]');
+            });
+        });
+    </script>
+</body></html>

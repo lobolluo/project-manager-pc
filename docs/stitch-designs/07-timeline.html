@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ProFlow - 项目详情 - 时间线</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "on-surface-variant": "#444650",
+                "outline-variant": "#c4c6d2",
+                "tertiary-fixed": "#d4e3ff",
+                "secondary-container": "#cfe2f9",
+                "error-container": "#ffdad6",
+                "surface-variant": "#e0e3e6",
+                "surface-container-low": "#f2f4f7",
+                "surface-container": "#eceef1",
+                "inverse-surface": "#2d3133",
+                "on-tertiary": "#ffffff",
+                "on-background": "#191c1e",
+                "surface-container-lowest": "#ffffff",
+                "on-surface": "#191c1e",
+                "on-tertiary-fixed": "#001c39",
+                "background": "#f7f9fc",
+                "tertiary-fixed-dim": "#a4c9ff",
+                "on-secondary-fixed": "#091d2e",
+                "on-tertiary-fixed-variant": "#004883",
+                "on-secondary-fixed-variant": "#36485b",
+                "surface-bright": "#f7f9fc",
+                "on-primary-fixed": "#001944",
+                "outline": "#747781",
+                "tertiary": "#00447d",
+                "on-primary": "#ffffff",
+                "secondary-fixed-dim": "#b5c8df",
+                "primary": "#21417f",
+                "on-tertiary-container": "#b9d5ff",
+                "surface-container-highest": "#e0e3e6",
+                "primary-container": "#3b5998",
+                "primary-fixed-dim": "#afc6ff",
+                "surface": "#f7f9fc",
+                "on-secondary-container": "#526478",
+                "surface-tint": "#3f5d9c",
+                "on-primary-fixed-variant": "#254583",
+                "inverse-primary": "#afc6ff",
+                "on-error-container": "#93000a",
+                "primary-fixed": "#d9e2ff",
+                "secondary-fixed": "#d1e4fb",
+                "inverse-on-surface": "#eff1f4",
+                "on-primary-container": "#c2d2ff",
+                "tertiary-container": "#005ca5",
+                "surface-dim": "#d8dadd",
+                "secondary": "#4e6073",
+                "on-error": "#ffffff",
+                "error": "#ba1a1a",
+                "surface-container-high": "#e6e8eb",
+                "on-secondary": "#ffffff"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+            },
+            "spacing": {
+                "md": "16px",
+                "margin-mobile": "16px",
+                "xs": "4px",
+                "lg": "24px",
+                "gutter": "20px",
+                "sm": "8px",
+                "2xl": "48px",
+                "base": "4px",
+                "xl": "32px",
+                "margin-desktop": "32px"
+            },
+            "fontFamily": {
+                "label-md": ["Inter"],
+                "body-sm": ["Inter"],
+                "body-lg": ["Inter"],
+                "headline-xl": ["Inter"],
+                "headline-lg": ["Inter"],
+                "body-md": ["Inter"],
+                "headline-lg-mobile": ["Inter"],
+                "headline-xl-mobile": ["Inter"],
+                "headline-md": ["Inter"]
+            },
+            "fontSize": {
+                "label-md": ["13px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                "body-sm": ["12px", {"lineHeight": "18px", "fontWeight": "400"}],
+                "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "headline-xl": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "headline-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                "headline-lg-mobile": ["22px", {"lineHeight": "28px", "fontWeight": "600"}],
+                "headline-xl-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .timeline-line {
+            width: 2px;
+            background: repeating-linear-gradient(to bottom, #c4c6d2 0, #c4c6d2 8px, transparent 8px, transparent 16px);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f7f9fc;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #c4c6d2;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md text-body-md antialiased custom-scrollbar">
+<!-- SideNavBar Anchor -->
+<aside class="fixed left-0 top-0 h-full w-[260px] z-50 bg-on-surface-variant dark:bg-inverse-surface border-r border-outline-variant dark:border-on-surface-variant shadow-md flex flex-col py-lg">
+<div class="px-lg mb-xl">
+<h1 class="font-headline-md text-headline-md font-black text-surface-container-lowest">ProFlow</h1>
+<p class="font-label-md text-label-md text-outline-variant opacity-80">Management Suite</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center text-outline-variant hover:text-surface-container-lowest px-4 py-3 hover:bg-secondary/10 transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined mr-md" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center text-surface-container-lowest font-bold bg-secondary/20 border-l-4 border-primary-fixed px-4 py-3 transition-all duration-200" href="#">
+<span class="material-symbols-outlined mr-md" data-icon="assignment">assignment</span>
+<span class="font-label-md text-label-md">Projects</span>
+</a>
+<a class="flex items-center text-outline-variant hover:text-surface-container-lowest px-4 py-3 hover:bg-secondary/10 transition-all duration-200" href="#">
+<span class="material-symbols-outlined mr-md" data-icon="check_box">check_box</span>
+<span class="font-label-md text-label-md">Tasks</span>
+</a>
+<a class="flex items-center text-outline-variant hover:text-surface-container-lowest px-4 py-3 hover:bg-secondary/10 transition-all duration-200" href="#">
+<span class="material-symbols-outlined mr-md" data-icon="group">group</span>
+<span class="font-label-md text-label-md">Team</span>
+</a>
+<a class="flex items-center text-outline-variant hover:text-surface-container-lowest px-4 py-3 hover:bg-secondary/10 transition-all duration-200" href="#">
+<span class="material-symbols-outlined mr-md" data-icon="bar_chart">bar_chart</span>
+<span class="font-label-md text-label-md">Reporting</span>
+</a>
+</nav>
+<div class="px-lg mb-xl">
+<button class="w-full bg-primary-fixed text-on-primary-fixed py-2 px-4 rounded-xl font-label-md text-label-md flex items-center justify-center gap-2 hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-md" data-icon="add">add</span>
+                New Project
+            </button>
+</div>
+<div class="mt-auto border-t border-outline-variant/20 pt-lg space-y-1">
+<a class="flex items-center text-outline-variant hover:text-surface-container-lowest px-4 py-3 hover:bg-secondary/10 transition-all duration-200" href="#">
+<span class="material-symbols-outlined mr-md" data-icon="help">help</span>
+<span class="font-label-md text-label-md">Help Center</span>
+</a>
+<a class="flex items-center text-outline-variant hover:text-surface-container-lowest px-4 py-3 hover:bg-secondary/10 transition-all duration-200" href="#">
+<span class="material-symbols-outlined mr-md" data-icon="logout">logout</span>
+<span class="font-label-md text-label-md">Logout</span>
+</a>
+</div>
+</aside>
+<!-- TopNavBar Anchor -->
+<header class="w-full h-16 sticky top-0 z-40 bg-surface border-b border-outline-variant shadow-sm flex justify-between items-center px-margin-desktop ml-[260px] max-w-[calc(100%-260px)]">
+<div class="flex items-center gap-md">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-full w-64 focus:ring-2 focus:ring-primary/20 text-body-md transition-all" placeholder="Search milestones..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-lg">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="flex items-center gap-sm pl-4 border-l border-outline-variant">
+<img alt="User Profile" class="w-8 h-8 rounded-full object-cover" data-alt="A professional headshot of a middle-aged male software architect with glasses, smiling warmly against a soft-focus office background. The lighting is bright and clean, characteristic of a high-end corporate environment. The image uses a natural color palette with cool blue tones in the background to match the professional project management software aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAvz4-q2OsGMrC0oSzFa1ON-9kTpAUILyz3dmL6M1ul4BOcCOFzSePJ9eUTTAYCIITJU9FYfVpZuFCYoB1Dv-yz2EPKzktdLl-m-lt5sRanmJSNeBpRQrAqe0OfNvKXYpdni1LD0A70iUHKFD8nWq9zfbduUKjVgGmjafnMzMm0RcineRppU6FUF_vxd5GNueYca8LjPgVmAdFWEhu_SeiJ_mVRFYCK-hQuIKCnvL2jev0ivvl0xn7DHlCISnpPN6zkcjl7S8VkII"/>
+<span class="font-label-md text-label-md text-on-surface-variant">Admin User</span>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="ml-[260px] p-margin-desktop min-h-[calc(100vh-64px)] bg-background">
+<!-- Breadcrumbs -->
+<nav class="flex items-center gap-2 mb-md text-outline font-label-md text-label-md">
+<span>项目</span>
+<span class="material-symbols-outlined text-[16px]" data-icon="chevron_right">chevron_right</span>
+<span class="text-primary font-bold">前端重构项目</span>
+</nav>
+<!-- Page Header -->
+<div class="flex flex-col gap-sm mb-xl">
+<div class="flex items-center gap-md">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">前端重构项目</h2>
+<span class="px-3 py-1 bg-primary-container text-on-primary-container text-body-sm font-semibold rounded-full flex items-center gap-1">
+<span class="w-1.5 h-1.5 bg-on-primary-container rounded-full animate-pulse"></span>
+                    进行中
+                </span>
+</div>
+</div>
+<!-- Detail Tabs -->
+<div class="flex items-center gap-xl border-b border-outline-variant mb-2xl">
+<button class="px-2 pb-3 font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors">概览</button>
+<button class="px-2 pb-3 font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors">任务列表</button>
+<button class="px-2 pb-3 font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors">成员</button>
+<button class="px-2 pb-3 font-label-md text-label-md text-primary font-bold border-b-2 border-primary">时间线</button>
+</div>
+<!-- Timeline Section -->
+<div class="relative max-w-5xl mx-auto py-10">
+<!-- Center Line -->
+<div class="absolute left-1/2 top-0 bottom-0 timeline-line -translate-x-1/2 hidden md:block"></div>
+<!-- Mobile Line (Left) -->
+<div class="absolute left-4 top-0 bottom-0 timeline-line md:hidden"></div>
+<div class="space-y-16">
+<!-- Milestone 1 (Right/Left Alternating) -->
+<div class="relative flex md:justify-start items-center group">
+<div class="md:w-1/2 pr-12 hidden md:block"></div>
+<div class="absolute left-4 md:left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white z-10 shadow-lg group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="w-full md:w-1/2 pl-12 md:pl-12">
+<div class="bg-surface-container-lowest p-lg rounded-xl shadow-sm border border-outline-variant hover:shadow-md transition-shadow">
+<span class="font-label-md text-label-md text-primary mb-1 block">2024-10-01</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">项目启动</h3>
+<p class="text-on-surface-variant text-body-md">完成核心干系人确认，明确重构目标与KPI指标，成功举办Kick-off会议。</p>
+<div class="mt-4 flex items-center gap-2">
+<span class="px-2 py-0.5 bg-secondary-container text-on-secondary-container text-body-sm rounded">已完成</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Milestone 2 -->
+<div class="relative flex md:justify-end items-center group">
+<div class="w-full md:w-1/2 pr-12 pl-12 md:pl-0">
+<div class="bg-surface-container-lowest p-lg rounded-xl shadow-sm border border-outline-variant hover:shadow-md transition-shadow text-left md:text-right">
+<span class="font-label-md text-label-md text-primary mb-1 block">2024-11-15</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">架构设计评审</h3>
+<p class="text-on-surface-variant text-body-md">通过技术委员会对微前端架构方案的审核，确认了基础框架升级与模块化路径。</p>
+<div class="mt-4 flex items-center justify-start md:justify-end gap-2">
+<span class="px-2 py-0.5 bg-secondary-container text-on-secondary-container text-body-sm rounded">已完成</span>
+</div>
+</div>
+</div>
+<div class="absolute left-4 md:left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white z-10 shadow-lg group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" data-icon="verified" data-weight="fill" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<div class="md:w-1/2 pl-12 hidden md:block"></div>
+</div>
+<!-- Milestone 3 -->
+<div class="relative flex md:justify-start items-center group">
+<div class="md:w-1/2 pr-12 hidden md:block"></div>
+<div class="absolute left-4 md:left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container z-10 shadow-lg group-hover:scale-110 transition-transform border-4 border-background">
+<span class="material-symbols-outlined animate-spin" data-icon="sync" style="animation-duration: 3s;">sync</span>
+</div>
+<div class="w-full md:w-1/2 pl-12 md:pl-12">
+<div class="bg-surface-container-lowest p-lg rounded-xl shadow-lg border-l-4 border-primary ring-1 ring-primary/5 hover:shadow-xl transition-shadow">
+<span class="font-label-md text-label-md text-primary mb-1 block">2024-12-20</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Alpha 版本发布</h3>
+<p class="text-on-surface-variant text-body-md">正在进行内部功能联调，包含登录模块重构与数据概览仪表盘的初步呈现。</p>
+<div class="mt-4 flex items-center gap-2">
+<span class="px-2 py-0.5 bg-tertiary-fixed text-on-tertiary-fixed text-body-sm rounded font-bold">进行中</span>
+<div class="flex-1 h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[65%]"></div>
+</div>
+<span class="text-body-sm font-bold text-primary">65%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Milestone 4 -->
+<div class="relative flex md:justify-end items-center group">
+<div class="w-full md:w-1/2 pr-12 pl-12 md:pl-0">
+<div class="bg-surface-container-low/50 p-lg rounded-xl border border-dashed border-outline-variant text-left md:text-right opacity-80 group-hover:opacity-100 transition-opacity">
+<span class="font-label-md text-label-md text-outline mb-1 block">2025-01-10</span>
+<h3 class="font-headline-md text-headline-md text-on-surface-variant mb-2">核心组件库完成</h3>
+<p class="text-outline text-body-md">标准化所有UI原子组件，实现Design Tokens在前端代码库中的自动化映射。</p>
+<div class="mt-4 flex items-center justify-start md:justify-end gap-2">
+<span class="px-2 py-0.5 bg-surface-container-high text-outline text-body-sm rounded">待启动</span>
+</div>
+</div>
+</div>
+<div class="absolute left-4 md:left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-outline z-10 border-4 border-background group-hover:bg-outline-variant group-hover:text-white transition-colors">
+<span class="material-symbols-outlined" data-icon="widgets">widgets</span>
+</div>
+<div class="md:w-1/2 pl-12 hidden md:block"></div>
+</div>
+<!-- Milestone 5 -->
+<div class="relative flex md:justify-start items-center group">
+<div class="md:w-1/2 pr-12 hidden md:block"></div>
+<div class="absolute left-4 md:left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-outline z-10 border-4 border-background group-hover:bg-outline-variant group-hover:text-white transition-colors">
+<span class="material-symbols-outlined" data-icon="bug_report">bug_report</span>
+</div>
+<div class="w-full md:w-1/2 pl-12 md:pl-12">
+<div class="bg-surface-container-low/50 p-lg rounded-xl border border-dashed border-outline-variant opacity-80 group-hover:opacity-100 transition-opacity">
+<span class="font-label-md text-label-md text-outline mb-1 block">2025-02-15</span>
+<h3 class="font-headline-md text-headline-md text-on-surface-variant mb-2">Beta 测试开始</h3>
+<p class="text-outline text-body-md">扩大测试范围至各业务部门，收集用户反馈并针对性能瓶颈进行专项调优。</p>
+<div class="mt-4 flex items-center gap-2">
+<span class="px-2 py-0.5 bg-surface-container-high text-outline text-body-sm rounded">待启动</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Milestone 6 -->
+<div class="relative flex md:justify-end items-center group">
+<div class="w-full md:w-1/2 pr-12 pl-12 md:pl-0">
+<div class="bg-surface-container-low/50 p-lg rounded-xl border border-dashed border-outline-variant text-left md:text-right opacity-80 group-hover:opacity-100 transition-opacity">
+<span class="font-label-md text-label-md text-outline mb-1 block">2025-03-30</span>
+<h3 class="font-headline-md text-headline-md text-on-surface-variant mb-2">正式上线</h3>
+<p class="text-outline text-body-md">完成旧系统停机与新版本全量切换，提供全天候技术保障，监控线上流量动态。</p>
+<div class="mt-4 flex items-center justify-start md:justify-end gap-2">
+<span class="px-2 py-0.5 bg-surface-container-high text-outline text-body-sm rounded">待启动</span>
+</div>
+</div>
+</div>
+<div class="absolute left-4 md:left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-outline z-10 border-4 border-background group-hover:bg-outline-variant group-hover:text-white transition-colors">
+<span class="material-symbols-outlined" data-icon="rocket_launch">rocket_launch</span>
+</div>
+<div class="md:w-1/2 pl-12 hidden md:block"></div>
+</div>
+</div>
+</div>
+<!-- FAB Support (Contextual) - Note: Only for Home/Dash context normally, but adding a "Add Milestone" as an interaction example if needed -->
+</main>
+<script>
+        // Simple hover interaction for timeline cards
+        document.querySelectorAll('.timeline-section div[class*="bg-surface-container"]').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.classList.add('scale-[1.01]');
+            });
+            card.addEventListener('mouseleave', () => {
+                card.classList.remove('scale-[1.01]');
+            });
+        });
+
+        // Theme switching logic (stub)
+        const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (isDarkMode) {
+            // document.documentElement.classList.add('dark');
+        }
+    </script>
+</body></html>

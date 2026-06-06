@@ -2,27 +2,18 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import {
-  LayoutDashboard,
-  KanbanSquare,
-  FolderKanban,
-  Settings,
-  ChevronLeft,
-  ChevronRight,
-} from 'lucide-react'
-import { useState } from 'react'
 import { cn } from '@/lib/utils'
 
 const navItems = [
-  { href: '/', label: '仪表盘', icon: LayoutDashboard },
-  { href: '/kanban', label: '看板', icon: KanbanSquare },
-  { href: '/projects', label: '项目', icon: FolderKanban },
-  { href: '/settings', label: '设置', icon: Settings },
+  { href: '/', label: 'Dashboard', icon: 'dashboard' },
+  { href: '/kanban', label: 'Kanban Board', icon: 'view_kanban' },
+  { href: '/projects', label: 'Projects', icon: 'folder_open' },
+  { href: '/team', label: 'Team', icon: 'group' },
+  { href: '/settings', label: 'Settings', icon: 'settings' },
 ]
 
 export function Sidebar() {
   const pathname = usePathname()
-  const [collapsed, setCollapsed] = useState(false)
 
   const isActive = (href: string) => {
     if (href === '/') return pathname === '/'
@@ -30,61 +21,57 @@ export function Sidebar() {
   }
 
   return (
-    <aside
-      className={cn(
-        'flex flex-col bg-[#2c3e50] text-white transition-all duration-200 h-screen sticky top-0',
-        collapsed ? 'w-16' : 'w-60'
-      )}
-    >
-      <div className="flex items-center h-16 px-4 border-b border-white/10">
-        {!collapsed && (
-          <h1 className="text-lg font-semibold tracking-tight">ProjectFlow</h1>
-        )}
-        <button
-          onClick={() => setCollapsed(!collapsed)}
-          className={cn(
-            'p-1.5 rounded-md hover:bg-white/10 transition-colors',
-            collapsed ? 'mx-auto' : 'ml-auto'
-          )}
-        >
-          {collapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
-        </button>
+    <aside className="fixed left-0 top-0 h-full w-[260px] bg-surface-container-highest flex flex-col border-r border-outline-variant z-50">
+      {/* Logo */}
+      <div className="px-6 py-8">
+        <div className="flex items-center gap-2">
+          <div className="w-10 h-10 bg-primary-container rounded flex items-center justify-center text-on-primary-container">
+            <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>view_quilt</span>
+          </div>
+          <div>
+            <h1 className="text-[20px] font-semibold text-on-surface leading-tight">ProPlan</h1>
+            <p className="text-[12px] text-on-surface-variant opacity-70">Management Suite</p>
+          </div>
+        </div>
       </div>
 
-      <nav className="flex-1 py-4 space-y-1 px-2">
+      {/* Navigation */}
+      <nav className="flex-1 px-2 space-y-1">
         {navItems.map((item) => {
-          const Icon = item.icon
           const active = isActive(item.href)
           return (
             <Link
               key={item.href}
               href={item.href}
               className={cn(
-                'flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors',
+                'flex items-center gap-3 px-4 py-3 transition-colors group',
                 active
-                  ? 'bg-white/15 text-white'
-                  : 'text-gray-300 hover:bg-white/10 hover:text-white'
+                  ? 'border-l-4 border-primary text-on-primary-container bg-primary-container'
+                  : 'text-on-surface-variant hover:bg-surface-container-high'
               )}
             >
-              <Icon size={20} className="shrink-0" />
-              {!collapsed && <span>{item.label}</span>}
+              <span
+                className={cn('material-symbols-outlined group-hover:scale-110 transition-transform', active && "[font-variation-settings:'FILL'_1,'wght'_400,'GRAD'_0,'opsz'_24]")}
+              >
+                {item.icon}
+              </span>
+              <span className="text-sm">{item.label}</span>
             </Link>
           )
         })}
       </nav>
 
-      <div className="p-4 border-t border-white/10">
-        {!collapsed && (
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-[#3b5998] flex items-center justify-center text-sm font-semibold">
-              张
-            </div>
-            <div className="min-w-0">
-              <p className="text-sm font-medium truncate">张三</p>
-              <p className="text-xs text-gray-400 truncate">项目经理</p>
-            </div>
+      {/* Org Card */}
+      <div className="p-6">
+        <div className="bg-surface-container-low p-4 rounded-xl border border-outline-variant flex items-center gap-2">
+          <div className="w-8 h-8 rounded bg-primary-container flex items-center justify-center text-on-primary-container">
+            <span className="material-symbols-outlined text-[18px]" style={{ fontVariationSettings: "'FILL' 1" }}>business</span>
           </div>
-        )}
+          <div className="overflow-hidden">
+            <p className="text-[13px] font-semibold text-on-surface truncate">TechFlow Inc.</p>
+            <p className="text-[12px] text-on-surface-variant">Pro Plan</p>
+          </div>
+        </div>
       </div>
     </aside>
   )

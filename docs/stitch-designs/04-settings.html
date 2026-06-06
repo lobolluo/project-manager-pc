@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ProPlan - 设置</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f7fa;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #e1e4e8;
+            border-radius: 10px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed": "#091d2e",
+                        "surface-container-low": "#f2f4f7",
+                        "on-secondary-container": "#526478",
+                        "on-tertiary": "#ffffff",
+                        "on-surface-variant": "#444650",
+                        "on-secondary-fixed-variant": "#36485b",
+                        "on-secondary": "#ffffff",
+                        "primary": "#21417f",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#3b5998",
+                        "on-primary-container": "#c2d2ff",
+                        "inverse-surface": "#2d3133",
+                        "primary-fixed-dim": "#afc6ff",
+                        "on-error": "#ffffff",
+                        "secondary-fixed-dim": "#b5c8df",
+                        "surface-variant": "#e0e3e6",
+                        "surface-container-highest": "#e0e3e6",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed-variant": "#254583",
+                        "tertiary-fixed-dim": "#a4c9ff",
+                        "surface-tint": "#3f5d9c",
+                        "tertiary": "#00447d",
+                        "on-primary-fixed": "#001944",
+                        "outline-variant": "#c4c6d2",
+                        "tertiary-fixed": "#d4e3ff",
+                        "surface-bright": "#f7f9fc",
+                        "surface-container-high": "#e6e8eb",
+                        "on-tertiary-fixed": "#001c39",
+                        "inverse-primary": "#afc6ff",
+                        "background": "#f7f9fc",
+                        "surface": "#f7f9fc",
+                        "inverse-on-surface": "#eff1f4",
+                        "surface-container": "#eceef1",
+                        "on-background": "#191c1e",
+                        "surface-dim": "#d8dadd",
+                        "secondary-fixed": "#d1e4fb",
+                        "primary-fixed": "#d9e2ff",
+                        "outline": "#747781",
+                        "secondary-container": "#cfe2f9",
+                        "on-tertiary-fixed-variant": "#004883",
+                        "on-tertiary-container": "#b9d5ff",
+                        "tertiary-container": "#005ca5",
+                        "secondary": "#4e6073",
+                        "on-surface": "#191c1e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "margin-desktop": "32px",
+                        "xl": "32px",
+                        "gutter": "20px",
+                        "sm": "8px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "xs": "4px",
+                        "margin-mobile": "16px",
+                        "2xl": "48px"
+                    },
+                    "fontFamily": {
+                        "headline-xl": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-xl": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-md": ["13px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-sm": ["12px", {"lineHeight": "18px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface">
+<!-- Side Navigation Bar -->
+<aside class="fixed left-0 top-0 h-full w-[260px] flex flex-col bg-surface-container-highest border-r border-outline-variant z-50">
+<div class="px-6 py-8">
+<h1 class="font-headline-md text-headline-md text-on-surface">ProPlan</h1>
+<p class="text-body-sm text-on-surface-variant">Management Suite</p>
+</div>
+<nav class="flex-grow">
+<ul class="space-y-1">
+<li>
+<a class="flex items-center gap-3 px-6 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-body-md text-body-md">Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-6 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="view_kanban">view_kanban</span>
+<span class="font-body-md text-body-md">Kanban Board</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-6 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="folder_open">folder_open</span>
+<span class="font-body-md text-body-md">Projects</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-6 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-body-md text-body-md">Team</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-6 py-3 border-l-4 border-primary text-on-primary-container bg-primary-container font-semibold" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</a>
+</li>
+</ul>
+</nav>
+<div class="p-6 border-t border-outline-variant">
+<div class="flex items-center gap-3">
+<img alt="Organization Logo" class="w-8 h-8 rounded-lg bg-surface-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCO0ADqoEYXDdIb0aBWOlfNdHQohk7frkQDu3E_EJGgFaSzzBooHeViwu36UVpjBxLNhQUuET635gV8eZHdu8UyXnAsXgXMhKaqSlU0Y4NKbn-aUUEDaVDlCijI8Agub_SCbHESDAQLHnSNWjisdJkC25s2_Uq2LOq4oNXoj1zgKswMoqmn796LgHQ_Sbv9hPdDlIUHUqnT2DMYDQGiSjPpMp1XFAlgssLiDsxSWBYZTOJJGwaZ4AhbUpGNmplzkU83yIUpWyJ3vE4"/>
+<div>
+<p class="text-body-sm font-semibold">Enterprise Corp</p>
+<p class="text-[10px] text-outline">Pro Plan Member</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 right-0 left-[260px] h-16 bg-surface-container-lowest border-b border-outline-variant shadow-sm flex justify-between items-center px-margin-desktop z-40">
+<div class="flex items-center bg-surface-container-low px-4 py-2 rounded-full w-96">
+<span class="material-symbols-outlined text-outline" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-md ml-2 w-full" placeholder="Search settings..." type="text"/>
+</div>
+<div class="flex items-center gap-6">
+<button class="hover:bg-surface-container-high p-2 rounded-full transition-all text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="hover:bg-surface-container-high p-2 rounded-full transition-all text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+<div class="h-8 w-[1px] bg-outline-variant"></div>
+<img alt="User Profile" class="w-8 h-8 rounded-full border border-outline-variant object-cover" data-alt="A professional headshot of a focused project manager in a bright, modern office setting. The lighting is soft and corporate, highlighting the clean and efficient atmosphere. The overall style is high-fidelity and sophisticated, using a palette of blues and grays to maintain visual consistency with a professional project management dashboard." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOPk2hWHcIvlHZwo2RV6YL-sFM3XP0AjedtIdyw6mObpfPCuopOtvkq9F4s3Ykwlkao1SOOj5rj9ExrMKTHZ56bX49OVcKqGidrUydNxVos1mw7w3QPhBYN35g4L43dvj9Mnu-YjoT66uFwrb-ZmcxJ2-24tVD03UxbghygGZS9vJEQYuF_asXwy7Yd6ovgELL0hl7A8Oj1IoFK1A7ustsyIZaBdjt52Wt1QCQfm_c4rzBevMH_RCmu7I_EYfCuhoZho6Vx2LKCwM"/>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-[260px] pt-16 min-h-screen">
+<div class="max-w-4xl mx-auto p-margin-desktop space-y-gutter">
+<header class="mb-lg">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">设置</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">管理您的个人资料、通知偏好和系统外观。</p>
+</header>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Left Column: Primary Settings -->
+<div class="md:col-span-8 space-y-gutter">
+<!-- Profile Section -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm p-lg">
+<div class="flex items-center gap-3 mb-lg">
+<span class="material-symbols-outlined text-primary" data-icon="person">person</span>
+<h3 class="font-headline-md text-headline-md">个人资料</h3>
+</div>
+<div class="flex flex-col md:flex-row gap-lg">
+<div class="flex-shrink-0 group relative cursor-pointer">
+<div class="w-32 h-32 rounded-full overflow-hidden border-4 border-surface-container relative">
+<img class="w-full h-full object-cover" data-alt="A high-quality close-up of a diverse professional individual smiling confidently. The image is set against a clean, minimalist architectural background with subtle blue-gray tones. The lighting is natural and bright, conveying a sense of reliability and modern professional competence, matching the corporate modern UI style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaBpWSI_clfcty8o2Ax6SPKf-z6cC4TuLYABlMMxOKnAGiPWwWUqdEAd_tfiWJTnIo2xWKVrIpVVVhXuB729u1YkdaE-QUy-7qirFNZHa2ygCXndfKOThyPrye7l2k45xCg7dC3xuGfskW-pL0RBSyQ4tAVMNyYBGI8j8nCsYoj4nBm9L72-8q4z9D-Z6LaXH0zfqbHZyQmnOEA-NuCC5zjU2rZENcSrjXbzW04y9cEh6WU5CzZBqR0-K7PmplTMtZukBC4LHIekE"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white">
+<span class="material-symbols-outlined text-lg" data-icon="photo_camera">photo_camera</span>
+<span class="text-[10px] mt-1 font-semibold">更换头像</span>
+</div>
+</div>
+</div>
+<div class="flex-grow space-y-md">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-md">
+<div class="space-y-xs">
+<label class="font-label-md text-label-md text-on-surface-variant">用户名</label>
+<input class="w-full h-10 border border-outline-variant rounded bg-surface-container-low px-3 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all text-body-md" type="text" value="Alex Chen"/>
+</div>
+<div class="space-y-xs">
+<label class="font-label-md text-label-md text-on-surface-variant">角色</label>
+<input class="w-full h-10 border border-outline-variant rounded bg-surface-container-low px-3 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all text-body-md" disabled="" type="text" value="项目经理"/>
+</div>
+</div>
+<div class="space-y-xs">
+<label class="font-label-md text-label-md text-on-surface-variant">邮箱</label>
+<input class="w-full h-10 border border-outline-variant rounded bg-surface-container-low px-3 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all text-body-md" type="email" value="alex.chen@proplan.com"/>
+</div>
+</div>
+</div>
+<div class="mt-lg pt-lg border-t border-outline-variant flex justify-end">
+<button class="h-10 px-6 bg-primary text-on-primary font-label-md text-label-md rounded hover:bg-primary-container transition-all active:scale-95 duration-75">
+                                保存修改
+                            </button>
+</div>
+</section>
+<!-- Appearance Settings -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm p-lg">
+<div class="flex items-center gap-3 mb-lg">
+<span class="material-symbols-outlined text-primary" data-icon="palette">palette</span>
+<h3 class="font-headline-md text-headline-md">外观设置</h3>
+</div>
+<div class="space-y-lg">
+<div>
+<label class="font-label-md text-label-md text-on-surface-variant block mb-md">主题模式</label>
+<div class="grid grid-cols-3 gap-md">
+<button class="flex flex-col items-center gap-2 p-4 border-2 border-primary bg-primary-container/10 rounded-lg transition-all group">
+<div class="w-full aspect-video bg-white rounded border border-outline-variant shadow-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="light_mode">light_mode</span>
+</div>
+<span class="font-label-md text-label-md text-primary">浅色</span>
+</button>
+<button class="flex flex-col items-center gap-2 p-4 border border-outline-variant hover:border-outline bg-surface-container-low rounded-lg transition-all group">
+<div class="w-full aspect-video bg-inverse-surface rounded border border-outline-variant shadow-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-surface-variant" data-icon="dark_mode">dark_mode</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant group-hover:text-on-surface">深色</span>
+</button>
+<button class="flex flex-col items-center gap-2 p-4 border border-outline-variant hover:border-outline bg-surface-container-low rounded-lg transition-all group">
+<div class="w-full aspect-video bg-gradient-to-br from-white to-inverse-surface rounded border border-outline-variant shadow-sm flex items-center justify-center overflow-hidden">
+<span class="material-symbols-outlined text-outline" data-icon="settings_brightness">settings_brightness</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant group-hover:text-on-surface">跟随系统</span>
+</button>
+</div>
+</div>
+<div class="space-y-xs max-w-xs">
+<label class="font-label-md text-label-md text-on-surface-variant">系统语言</label>
+<div class="relative">
+<select class="w-full h-10 border border-outline-variant rounded bg-surface-container-low px-3 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all text-body-md appearance-none cursor-pointer">
+<option value="zh">简体中文 (Chinese Simplified)</option>
+<option value="en">English (US)</option>
+<option value="jp">日本語 (Japanese)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-outline" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: List Settings & Danger Zone -->
+<div class="md:col-span-4 space-y-gutter">
+<!-- Notification Settings -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm p-lg">
+<div class="flex items-center gap-3 mb-lg">
+<span class="material-symbols-outlined text-primary" data-icon="notifications_active">notifications_active</span>
+<h3 class="font-headline-md text-headline-md">通知设置</h3>
+</div>
+<div class="space-y-sm">
+<div class="flex items-center justify-between py-2">
+<div>
+<p class="font-body-md text-on-surface">邮件通知</p>
+<p class="text-[10px] text-on-surface-variant">接收每日工作摘要邮件</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="flex items-center justify-between py-2">
+<div>
+<p class="font-body-md text-on-surface">任务分配提醒</p>
+<p class="text-[10px] text-on-surface-variant">当有新任务分配给您时提醒</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="flex items-center justify-between py-2">
+<div>
+<p class="font-body-md text-on-surface">截止日期提醒</p>
+<p class="text-[10px] text-on-surface-variant">任务即将到期时发出警报</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="flex items-center justify-between py-2">
+<div>
+<p class="font-body-md text-on-surface">项目更新通知</p>
+<p class="text-[10px] text-on-surface-variant">团队成员发布评论时通知</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</section>
+<!-- Danger Zone -->
+<section class="bg-error-container/20 rounded-xl border-2 border-error/20 p-lg">
+<div class="flex items-center gap-3 mb-md">
+<span class="material-symbols-outlined text-error" data-icon="report_problem">report_problem</span>
+<h3 class="font-headline-md text-headline-md text-error">危险区域</h3>
+</div>
+<p class="font-body-sm text-on-surface-variant mb-lg">
+                            永久删除您的帐户以及所有相关数据。此操作不可撤销，请谨慎操作。
+                        </p>
+<button class="w-full h-10 bg-error text-on-error font-label-md text-label-md rounded hover:brightness-110 transition-all active:scale-95 duration-75">
+                            删除账户
+                        </button>
+</section>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="max-w-4xl mx-auto px-margin-desktop py-lg text-center">
+<p class="text-body-sm text-outline">© 2024 ProPlan Project Management Suite. All rights reserved.</p>
+</footer>
+</main>
+<script>
+        // Simple micro-interaction for theme selection buttons
+        const themeButtons = document.querySelectorAll('.grid-cols-3 button');
+        themeButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                themeButtons.forEach(b => {
+                    b.classList.remove('border-primary', 'bg-primary-container/10');
+                    b.classList.add('border-outline-variant', 'bg-surface-container-low');
+                    b.querySelector('span:last-child').classList.remove('text-primary');
+                    b.querySelector('span:last-child').classList.add('text-on-surface-variant');
+                });
+                btn.classList.add('border-primary', 'bg-primary-container/10');
+                btn.classList.remove('border-outline-variant', 'bg-surface-container-low');
+                btn.querySelector('span:last-child').classList.add('text-primary');
+                btn.querySelector('span:last-child').classList.remove('text-on-surface-variant');
+            });
+        });
+
+        // Hover animation for avatar
+        const avatarContainer = document.querySelector('.group.relative');
+        avatarContainer.addEventListener('mouseenter', () => {
+            avatarContainer.querySelector('div.bg-black\\/40').classList.replace('opacity-0', 'opacity-100');
+        });
+        avatarContainer.addEventListener('mouseleave', () => {
+            avatarContainer.querySelector('div.bg-black\\/40').classList.replace('opacity-100', 'opacity-0');
+        });
+    </script>
+</body></html>

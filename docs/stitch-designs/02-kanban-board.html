@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ProManage - 看板管理</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fc;
+        }
+        .kanban-column {
+            min-height: calc(100vh - 240px);
+        }
+        .drag-hint {
+            border: 2px dashed #747781;
+            opacity: 0.6;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#ffffff",
+                        "error": "#ba1a1a",
+                        "surface": "#f7f9fc",
+                        "primary": "#21417f",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed": "#001944",
+                        "tertiary": "#00447d",
+                        "secondary-fixed-dim": "#b5c8df",
+                        "surface-tint": "#3f5d9c",
+                        "surface-bright": "#f7f9fc",
+                        "surface-variant": "#e0e3e6",
+                        "surface-container-low": "#f2f4f7",
+                        "secondary-container": "#cfe2f9",
+                        "on-secondary-fixed": "#091d2e",
+                        "surface-dim": "#d8dadd",
+                        "on-secondary-container": "#526478",
+                        "surface-container-high": "#e6e8eb",
+                        "on-primary-fixed-variant": "#254583",
+                        "on-tertiary-fixed": "#001c39",
+                        "tertiary-fixed": "#d4e3ff",
+                        "secondary": "#4e6073",
+                        "on-tertiary-container": "#b9d5ff",
+                        "on-error": "#ffffff",
+                        "surface-container-highest": "#e0e3e6",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#a4c9ff",
+                        "inverse-on-surface": "#eff1f4",
+                        "primary-fixed": "#d9e2ff",
+                        "inverse-primary": "#afc6ff",
+                        "on-surface": "#191c1e",
+                        "background": "#f7f9fc",
+                        "on-primary-container": "#c2d2ff",
+                        "on-background": "#191c1e",
+                        "tertiary-container": "#005ca5",
+                        "on-secondary-fixed-variant": "#36485b",
+                        "on-primary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "primary-fixed-dim": "#afc6ff",
+                        "on-tertiary-fixed-variant": "#004883",
+                        "on-surface-variant": "#444650",
+                        "on-error-container": "#93000a",
+                        "surface-container": "#eceef1",
+                        "primary-container": "#3b5998",
+                        "secondary-fixed": "#d1e4fb",
+                        "outline-variant": "#c4c6d2",
+                        "outline": "#747781",
+                        "inverse-surface": "#2d3133"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-desktop": "32px",
+                        "xs": "4px",
+                        "xl": "32px",
+                        "lg": "24px",
+                        "gutter": "20px",
+                        "base": "4px",
+                        "2xl": "48px",
+                        "sm": "8px",
+                        "md": "16px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["13px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-xl": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-sm": ["12px", {"lineHeight": "18px", "fontWeight": "400"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "headline-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface flex overflow-hidden">
+<!-- SideNavBar -->
+<aside class="w-[260px] h-screen flex-shrink-0 bg-surface-container-low border-r border-outline-variant flex flex-col py-md">
+<div class="px-lg mb-xl">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined">account_tree</span>
+</div>
+<div>
+<h1 class="text-headline-sm font-headline-sm text-on-surface">Project Workspace</h1>
+<p class="text-label-md font-label-md text-secondary">Enterprise Plan</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-sm space-y-xs">
+<a class="flex items-center gap-md px-md py-sm text-secondary hover:bg-surface-container-high transition-all duration-200 ease-in-out rounded-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-secondary hover:bg-surface-container-high transition-all duration-200 ease-in-out rounded-lg" href="#">
+<span class="material-symbols-outlined">account_tree</span>
+<span class="font-label-md text-label-md">Projects</span>
+</a>
+<!-- Active State -->
+<a class="flex items-center gap-md px-md py-sm bg-primary-container text-on-primary-container border-l-4 border-primary transition-all duration-200 ease-in-out rounded-r-lg" href="#">
+<span class="material-symbols-outlined">assignment</span>
+<span class="font-label-md text-label-md">Tasks</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-secondary hover:bg-surface-container-high transition-all duration-200 ease-in-out rounded-lg" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-label-md text-label-md">Calendar</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-secondary hover:bg-surface-container-high transition-all duration-200 ease-in-out rounded-lg" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md">Reports</span>
+</a>
+</nav>
+<div class="px-sm mt-auto border-t border-outline-variant pt-md">
+<a class="flex items-center gap-md px-md py-sm text-secondary hover:bg-surface-container-high transition-all duration-200 ease-in-out rounded-lg" href="#">
+<span class="material-symbols-outlined">support_agent</span>
+<span class="font-label-md text-label-md">Help Center</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-secondary hover:bg-surface-container-high transition-all duration-200 ease-in-out rounded-lg" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col min-w-0">
+<!-- TopNavBar -->
+<header class="w-full h-16 bg-surface shadow-sm border-b border-outline-variant flex justify-between items-center px-lg">
+<div class="flex items-center gap-xl">
+<h2 class="text-headline-md font-headline-md text-primary">ProManage</h2>
+<div class="relative w-80">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container border border-outline-variant rounded-full text-body-md focus:outline-none focus:border-primary" placeholder="搜索任务..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-lg">
+<div class="flex gap-md">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-full cursor-pointer">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-full cursor-pointer">
+<span class="material-symbols-outlined">help</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-full cursor-pointer">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+<div class="h-8 w-px bg-outline-variant"></div>
+<div class="flex items-center gap-sm">
+<img alt="User Profile" class="w-8 h-8 rounded-full border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHeYDviIOTWwtrJ0X93X9xMUXBmtjw9B6QUxMj_2h2z_NhHhpf5t37RbjH9oJLS9Ei3_2qELKik0jnigwRRunv9XaKEx43g1Q35s1TKfgOjM8pvIDMNU3OgVuVw2aMTqum29okFyofiPvWNhwGS3sS8x9XyUnwHBNmTQrpzKrdL5xAqGWNLePnNP1GLj3XUeExsqwjtwl2vKxz2liivrgxSEIurhN1MmzcTObQ9wNLVcTL263ILLwkKOU9QHhcLReUu5D8vOlqX2M"/>
+<span class="text-body-md font-label-md">管理员</span>
+</div>
+</div>
+</header>
+<!-- Page Toolbar -->
+<div class="p-lg flex justify-between items-center bg-surface">
+<div class="flex items-center gap-md">
+<h3 class="text-headline-lg font-headline-lg">任务看板</h3>
+<div class="flex items-center bg-surface-container-high px-sm py-1 rounded-lg">
+<span class="material-symbols-outlined text-[18px] mr-1">filter_list</span>
+<span class="text-label-md font-label-md">筛选器</span>
+</div>
+</div>
+<button class="bg-primary text-on-primary px-lg py-2 rounded-lg font-label-md flex items-center gap-xs hover:opacity-90 active:opacity-80 transition-all shadow-sm">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                新建任务
+            </button>
+</div>
+<!-- Kanban Board Area -->
+<div class="flex-1 overflow-x-auto p-lg pt-0">
+<div class="flex gap-lg h-full min-w-max">
+<!-- Column: Todo -->
+<div class="w-80 flex flex-col bg-surface-container-low rounded-xl">
+<div class="p-md flex items-center justify-between border-b-2 border-primary/20">
+<div class="flex items-center gap-sm">
+<div class="w-2 h-6 bg-primary rounded-full"></div>
+<span class="font-headline-md text-headline-md text-on-surface">待办</span>
+<span class="bg-surface-container-highest px-2 py-0.5 rounded-full text-body-sm font-label-md">5</span>
+</div>
+<button class="text-outline hover:text-on-surface"><span class="material-symbols-outlined">more_horiz</span></button>
+</div>
+<div class="kanban-column flex-1 p-sm space-y-md overflow-y-auto">
+<!-- Task Card 1 -->
+<div class="bg-surface-container-lowest p-md rounded-lg border border-outline-variant shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+<div class="flex justify-between items-start mb-sm">
+<span class="bg-secondary-container text-on-secondary-container text-body-sm font-label-md px-2 py-0.5 rounded">Website</span>
+<div class="flex items-center gap-1">
+<div class="w-2 h-2 rounded-full bg-error"></div>
+<span class="text-body-sm text-outline">高</span>
+</div>
+</div>
+<h4 class="font-headline-md text-[15px] mb-md leading-tight">重新设计登录页面 UI 规范</h4>
+<div class="flex justify-between items-center">
+<div class="flex items-center text-outline gap-1">
+<span class="material-symbols-outlined text-[16px]">calendar_today</span>
+<span class="text-body-sm">Oct 12</span>
+</div>
+<img alt="Assignee" class="w-6 h-6 rounded-full border border-outline-variant" data-alt="A clean professional studio portrait of a young male creative professional with a friendly smile, high-end corporate lighting, soft blurred office background, wearing a modern blue polo shirt, professional photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDp-ULJI6GTcWppqLQdzxPlE24LgjtZnQ31NPdr2ekvmrs1_2wjNiA_UsXgHykHE2mwuSEZUvaZGduysRKk8oaB-479ZOY3vCGj9Rz1Oep1FKfNWuHvbpuAglwvmRbUPwuJDY5saoRc3c7Bwm_bnosmdRwvD515btUDXmX2rkjw1HXZDdGQEBXG05Lk5FLD1inwBYJAcklGCgz_gnSddi-cf97ZWbZE3JDNiym9x9q4p9eMRBTA95P159uy8L3RGA28SzeOsBr7bec"/>
+</div>
+</div>
+<!-- Task Card 2 -->
+<div class="bg-surface-container-lowest p-md rounded-lg border border-outline-variant shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+<div class="flex justify-between items-start mb-sm">
+<span class="bg-tertiary-container text-on-tertiary-container text-body-sm font-label-md px-2 py-0.5 rounded">Marketing</span>
+<div class="flex items-center gap-1">
+<div class="w-2 h-2 rounded-full bg-amber-500"></div>
+<span class="text-body-sm text-outline">中</span>
+</div>
+</div>
+<h4 class="font-headline-md text-[15px] mb-md leading-tight">制定 Q4 社交媒体营销方案</h4>
+<div class="flex justify-between items-center">
+<div class="flex items-center text-outline gap-1">
+<span class="material-symbols-outlined text-[16px]">calendar_today</span>
+<span class="text-body-sm">Oct 15</span>
+</div>
+<img alt="Assignee" class="w-6 h-6 rounded-full border border-outline-variant" data-alt="A high-quality profile picture of a female project manager with glasses, neutral professional studio lighting, warm skin tones, and a focused expression, in a minimalist office setting, professional LinkedIn aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEXtOhLSxrYFDvchU-XMd7PsEy3Ns7Gq_i-RKlvCPk7soQHTW4GJJG9QLnUmWjHAJJBYmtWkg9X3pjv-huyTZt2c_DhsBz8QSunzloNA30MnY66m6gZbiVSIc9-TuTXUm707JhyzLyFTLTRi9WcikyW0ChFofVuyRC-PIAEjXOFMiwYVZvyKwpmuho0kY7JcDmXeLNGxj-ku2O_tcorW49QhV-siWGf1YxrO5KMG9CVpzdCmyL7gOohcrTNMb8Lozf4rsrJPaaRqk"/>
+</div>
+</div>
+<!-- Dotted Hint -->
+<div class="drag-hint h-24 rounded-lg flex items-center justify-center text-outline text-body-sm">
+                            将任务拖动至此
+                        </div>
+</div>
+<button class="w-full p-md flex items-center justify-center gap-xs text-outline hover:text-primary transition-colors font-label-md">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                        添加任务
+                    </button>
+</div>
+<!-- Column: In Progress -->
+<div class="w-80 flex flex-col bg-surface-container-low rounded-xl">
+<div class="p-md flex items-center justify-between border-b-2 border-amber-400/50">
+<div class="flex items-center gap-sm">
+<div class="w-2 h-6 bg-amber-400 rounded-full"></div>
+<span class="font-headline-md text-headline-md text-on-surface">进行中</span>
+<span class="bg-surface-container-highest px-2 py-0.5 rounded-full text-body-sm font-label-md">3</span>
+</div>
+<button class="text-outline hover:text-on-surface"><span class="material-symbols-outlined">more_horiz</span></button>
+</div>
+<div class="kanban-column flex-1 p-sm space-y-md overflow-y-auto">
+<!-- Task Card 3 -->
+<div class="bg-surface-container-lowest p-md rounded-lg border border-outline-variant shadow-sm hover:shadow-md transition-shadow cursor-pointer border-l-4 border-amber-400">
+<div class="flex justify-between items-start mb-sm">
+<span class="bg-primary-container text-on-primary-container text-body-sm font-label-md px-2 py-0.5 rounded">App</span>
+<div class="flex items-center gap-1">
+<div class="w-2 h-2 rounded-full bg-error"></div>
+<span class="text-body-sm text-outline">高</span>
+</div>
+</div>
+<h4 class="font-headline-md text-[15px] mb-md leading-tight">API 接口性能优化 - 阶段二</h4>
+<div class="flex justify-between items-center">
+<div class="flex items-center text-outline gap-1">
+<span class="material-symbols-outlined text-[16px]">calendar_today</span>
+<span class="text-body-sm">Oct 10</span>
+</div>
+<img alt="Assignee" class="w-6 h-6 rounded-full border border-outline-variant" data-alt="A professional headshot of a software engineer, creative studio lighting with subtle cool tones, focused expression, cinematic depth of field, modern corporate look." src="https://lh3.googleusercontent.com/aida-public/AB6AXuACQSkmV01lw_naS_tcFBxRpPPOurLIakS-vovcrEOX82h68Ak5QAAcHYpRgLGiZoLEtzf6uvcI98lehxE4eosrEjtlAq73jDDfTK0hEBnTQKbjbXMy1Z6OOwnA8rxKTwQzjHa5rH4ztuEeHF1ziMjte44BSMkm3ILr0xaSstFK_CQ6vOr7sURDeJTXHbR99x3nKrUmFUrR_2ifFjYBjhXf6B4-3rB4GmvVqTBMwoh-VHVxQIGRrIfPj3czRHo5IWL65cBqAYDkw1A"/>
+</div>
+</div>
+<!-- Task Card 4 -->
+<div class="bg-surface-container-lowest p-md rounded-lg border border-outline-variant shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+<div class="flex justify-between items-start mb-sm">
+<span class="bg-secondary-container text-on-secondary-container text-body-sm font-label-md px-2 py-0.5 rounded">Website</span>
+<div class="flex items-center gap-1">
+<div class="w-2 h-2 rounded-full bg-green-500"></div>
+<span class="text-body-sm text-outline">低</span>
+</div>
+</div>
+<h4 class="font-headline-md text-[15px] mb-md leading-tight">页脚内容多语言翻译校对</h4>
+<div class="flex justify-between items-center">
+<div class="flex items-center text-outline gap-1">
+<span class="material-symbols-outlined text-[16px]">calendar_today</span>
+<span class="text-body-sm">Oct 20</span>
+</div>
+<div class="flex -space-x-2">
+<img alt="Assignee" class="w-6 h-6 rounded-full border border-on-surface-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmbpa0AQ3_pZSW0Ss7mY8o3Lv5uVG0R2drdD4qw_2oUpqlQoYmmtM3iMOeUE1oQL9nH6OIkGJoMwxSpgmix6-_Y9Ef_NjV9UmPC3RDDvHfUP2qsHdH8tJL7WqnLl0gFOG52rMqMcybZpYbpQgnv7Oyiu0DG6lhTUaIpfACSWVmt0jJKjCY6Rrq3YZxjWLjSi11tpJMtoe2SXCYh2JvMIdofxSdYnhfTgCW9amkeBqv36G0brM7jO29CzpmxqrtomxJT63UQROY8k8"/>
+<img alt="Assignee" class="w-6 h-6 rounded-full border border-on-surface-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEr0V-EXaLb4Bkw9pkrq2YJS441r4a524c9xD7VguWX3EXdNAGFUwsj0uXYfq64BV9JPYqPfTwaCVHw9O-n2b-OjfnH9TGXpjePZzZMpP7E3Tg_eloc-BUka5GDkGr8XLCKGD2hibIFUv3gpTB7Ct_WverJwfD6qYCjglSxED7SlI29EubQkUzFbhpGWkhyihn5_g2tjqJsFoi6tZrJzVYfEKqzXJnH9sKd5tl0Q9UgP6YrFc8hB9g9Id5_j10wtPxyZQOMUU-16U"/>
+</div>
+</div>
+</div>
+</div>
+<button class="w-full p-md flex items-center justify-center gap-xs text-outline hover:text-primary transition-colors font-label-md">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                        添加任务
+                    </button>
+</div>
+<!-- Column: Done -->
+<div class="w-80 flex flex-col bg-surface-container-low rounded-xl">
+<div class="p-md flex items-center justify-between border-b-2 border-green-500/50">
+<div class="flex items-center gap-sm">
+<div class="w-2 h-6 bg-green-500 rounded-full"></div>
+<span class="font-headline-md text-headline-md text-on-surface">已完成</span>
+<span class="bg-surface-container-highest px-2 py-0.5 rounded-full text-body-sm font-label-md">4</span>
+</div>
+<button class="text-outline hover:text-on-surface"><span class="material-symbols-outlined">more_horiz</span></button>
+</div>
+<div class="kanban-column flex-1 p-sm space-y-md overflow-y-auto">
+<!-- Task Card 5 -->
+<div class="bg-surface-container-lowest p-md rounded-lg border border-outline-variant shadow-sm opacity-75 grayscale-[0.5]">
+<div class="flex justify-between items-start mb-sm">
+<span class="bg-tertiary-container text-on-tertiary-container text-body-sm font-label-md px-2 py-0.5 rounded">App</span>
+<span class="material-symbols-outlined text-green-500 text-[18px]">check_circle</span>
+</div>
+<h4 class="font-headline-md text-[15px] mb-md leading-tight line-through text-outline">用户个人资料模块 Bug 修复</h4>
+<div class="flex justify-between items-center">
+<div class="flex items-center text-outline gap-1">
+<span class="material-symbols-outlined text-[16px]">calendar_today</span>
+<span class="text-body-sm">Oct 05</span>
+</div>
+<img alt="Assignee" class="w-6 h-6 rounded-full border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdazMXaUZbYltTNkFsVspsmnSar6zUVUS9n8c9TNnNKD1sTebC4JM90O_A8-9joi2fNe5dBc3yoDQoAYNROLx7Ke_3M_RNWpLbPd2mihk0_FY-dDwXyKFxvw-yOqG49sKH2MV7eKNpACDDS5gV3_uMxIJCQ1ZC5DIqWRKsvTIooKv4lcCDQdvFpITFQhUdjxiRPRY5bpFhKUV319_eLcQfKKWKS1QwvTbExyQc6syMhhBjsfh9R9LvQWTKg8CA-7sPkx7jRYL9P5s"/>
+</div>
+</div>
+<!-- Task Card 6 -->
+<div class="bg-surface-container-lowest p-md rounded-lg border border-outline-variant shadow-sm opacity-75 grayscale-[0.5]">
+<div class="flex justify-between items-start mb-sm">
+<span class="bg-secondary-container text-on-secondary-container text-body-sm font-label-md px-2 py-0.5 rounded">Website</span>
+<span class="material-symbols-outlined text-green-500 text-[18px]">check_circle</span>
+</div>
+<h4 class="font-headline-md text-[15px] mb-md leading-tight line-through text-outline">上传 Q3 项目审计报告</h4>
+<div class="flex justify-between items-center">
+<div class="flex items-center text-outline gap-1">
+<span class="material-symbols-outlined text-[16px]">calendar_today</span>
+<span class="text-body-sm">Oct 01</span>
+</div>
+<img alt="Assignee" class="w-6 h-6 rounded-full border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZSzNHCWorUf4VHmdEMZ_GSZYpcAAd1EbZj7ZO3lVMbJaObu4giL9iE3HalX1bdrAKjJZ1SrIqR9x0Z6mCpFEONhuxmQICdh5tqQDp61y4o9kmlKSa-Kexr_t1JLOJgxli2eTb-SA-myWc72EHlnUzIxQfPY2tmY5qRYSESN-mzzGuxDURXD2vU-g586_JuQG6LWnq3tAkUzpO9j1V_MJhTVfeEgFYYWYFpuSYj5lSIquVQ2frOV-7AA7aUGZZRl0a0NqUhYZW2Zw"/>
+</div>
+</div>
+</div>
+<button class="w-full p-md flex items-center justify-center gap-xs text-outline hover:text-primary transition-colors font-label-md">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                        添加任务
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Simple micro-interaction for active menu
+        const navItems = document.querySelectorAll('aside nav a');
+        navItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                navItems.forEach(nav => {
+                    nav.classList.remove('bg-primary-container', 'text-on-primary-container', 'border-l-4', 'border-primary');
+                    nav.classList.add('text-secondary', 'hover:bg-surface-container-high');
+                });
+                item.classList.add('bg-primary-container', 'text-on-primary-container', 'border-l-4', 'border-primary');
+                item.classList.remove('text-secondary', 'hover:bg-surface-container-high');
+            });
+        });
+
+        // Hover effect for Kanban Cards
+        const cards = document.querySelectorAll('.kanban-column > div:not(.drag-hint)');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-2px)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0px)';
+            });
+        });
+    </script>
+</body></html>

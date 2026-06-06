@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ProStream - 前端重构项目</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-variant": "#e0e3e6",
+                    "surface-container-highest": "#e0e3e6",
+                    "on-error-container": "#93000a",
+                    "on-primary-fixed-variant": "#254583",
+                    "tertiary": "#00447d",
+                    "on-primary-fixed": "#001944",
+                    "outline-variant": "#c4c6d2",
+                    "tertiary-fixed": "#d4e3ff",
+                    "tertiary-fixed-dim": "#a4c9ff",
+                    "surface-tint": "#3f5d9c",
+                    "inverse-primary": "#afc6ff",
+                    "background": "#f7f9fc",
+                    "surface": "#f7f9fc",
+                    "inverse-on-surface": "#eff1f4",
+                    "surface-bright": "#f7f9fc",
+                    "surface-container-high": "#e6e8eb",
+                    "on-tertiary-fixed": "#001c39",
+                    "secondary": "#4e6073",
+                    "on-surface": "#191c1e",
+                    "surface-container": "#eceef1",
+                    "on-background": "#191c1e",
+                    "surface-dim": "#d8dadd",
+                    "secondary-fixed": "#d1e4fb",
+                    "primary-fixed": "#d9e2ff",
+                    "outline": "#747781",
+                    "secondary-container": "#cfe2f9",
+                    "on-tertiary-fixed-variant": "#004883",
+                    "on-tertiary-container": "#b9d5ff",
+                    "tertiary-container": "#005ca5",
+                    "surface-container-lowest": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "error": "#ba1a1a",
+                    "on-secondary-container": "#526478",
+                    "on-secondary-fixed": "#091d2e",
+                    "surface-container-low": "#f2f4f7",
+                    "primary": "#21417f",
+                    "on-tertiary": "#ffffff",
+                    "on-surface-variant": "#444650",
+                    "on-secondary-fixed-variant": "#36485b",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed-dim": "#afc6ff",
+                    "on-error": "#ffffff",
+                    "secondary-fixed-dim": "#b5c8df",
+                    "on-primary": "#ffffff",
+                    "primary-container": "#3b5998",
+                    "on-primary-container": "#c2d2ff",
+                    "inverse-surface": "#2d3133"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "xl": "32px",
+                    "gutter": "20px",
+                    "sm": "8px",
+                    "base": "4px",
+                    "margin-desktop": "32px",
+                    "margin-mobile": "16px",
+                    "2xl": "48px",
+                    "md": "16px",
+                    "lg": "24px",
+                    "xs": "4px"
+            },
+            "fontFamily": {
+                    "headline-xl": ["Inter"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-xl-mobile": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "headline-lg-mobile": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-xl": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-xl-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-sm": ["12px", {"lineHeight": "18px", "fontWeight": "400"}],
+                    "label-md": ["13px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["22px", {"lineHeight": "28px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #f5f7fa; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .tonal-card {
+            background-color: #ffffff;
+            border: 1px solid #e1e4e8;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+            transition: box-shadow 0.2s ease-in-out;
+        }
+        .tonal-card:hover {
+            box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.08);
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface">
+<!-- SideNavBar Shell -->
+<aside class="flex flex-col h-screen fixed left-0 top-0 border-r border-outline-variant bg-surface-container w-[260px] z-50">
+<div class="p-lg flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined" data-icon="corporate_fare">corporate_fare</span>
+</div>
+<div>
+<h2 class="font-headline-md text-on-surface leading-tight">Acme Corp</h2>
+<p class="text-body-sm text-secondary">Enterprise Plan</p>
+</div>
+</div>
+<div class="mt-md px-md">
+<button class="w-full bg-primary text-on-primary font-label-md py-3 rounded-lg flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>
+                New Project
+            </button>
+</div>
+<nav class="flex-1 mt-lg px-md space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-secondary hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="view_kanban">view_kanban</span>
+<span class="font-label-md">Kanban Board</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-primary-container bg-primary-container rounded-lg border-l-4 border-primary" href="#">
+<span class="material-symbols-outlined" data-icon="folder_open">folder_open</span>
+<span class="font-label-md">Projects</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span class="font-label-md">Team</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-md">Settings</span>
+</a>
+</nav>
+<div class="p-lg border-t border-outline-variant">
+<div class="flex items-center gap-3">
+<img alt="User Profile Avatar" class="w-8 h-8 rounded-full border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzRzTw-k8D3Y4JewqIpK1C_5ippnJOJZy_6Rstnwuutu3awJD7yG_MaL16yNHBQsdjuS7qp-PLxmCU92_2LbLhURkdmjnw4FFuuyLe7gybF0cnoMwhvNlAkAi4BKbciagbCHkGqhaxP5ZC3fuCoigEGyp9jRm5DN4ZS-e-pr55p_Kem85tpYD8CTH3rzd-A5ldI5yuGgObjL01mgIlsRoo73dcf9Q-dCGbUY-q0XVt0pMG4BuKQgAEhaf4T-UL7ulR0zQZDQQJir0"/>
+<div class="overflow-hidden">
+<p class="font-label-md text-on-surface truncate">Alex Johnson</p>
+<p class="text-body-sm text-secondary truncate">alex@acme.com</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- TopNavBar Shell -->
+<header class="flex justify-between items-center w-full px-6 py-2 sticky top-0 z-40 bg-surface-container-lowest shadow-sm border-b border-outline-variant ml-[260px] w-[calc(100%-260px)]">
+<div class="flex items-center gap-xl">
+<span class="font-headline-md font-bold text-primary">ProStream</span>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
+<input class="pl-10 pr-4 py-1.5 bg-surface-container-low border-none rounded-full text-body-sm w-64 focus:ring-2 focus:ring-primary-container" placeholder="Search tasks, docs..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<button class="p-2 hover:bg-surface-container-high rounded-full transition-colors relative">
+<span class="material-symbols-outlined text-secondary" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-surface-container-lowest"></span>
+</button>
+<button class="p-2 hover:bg-surface-container-high rounded-full transition-colors">
+<span class="material-symbols-outlined text-secondary" data-icon="help">help</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-[260px] p-margin-desktop">
+<!-- Project Header Section -->
+<section class="mb-lg">
+<nav class="mb-base flex items-center gap-2 text-body-sm text-secondary">
+<a class="hover:text-primary" href="#">项目</a>
+<span class="material-symbols-outlined text-[16px]" data-icon="chevron_right">chevron_right</span>
+<span class="text-on-surface font-medium">前端重构项目</span>
+</nav>
+<div class="flex items-center gap-4 mt-2">
+<h1 class="font-headline-xl text-on-surface">前端重构项目</h1>
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container font-label-md rounded-full flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+                    进行中
+                </span>
+</div>
+<p class="mt-2 text-body-lg text-secondary max-w-3xl">
+                Modernizing the frontend architecture to improve performance and developer experience. Leveraging the latest framework features and design system tokens.
+            </p>
+<!-- Navigation Tabs -->
+<div class="mt-xl flex items-center gap-8 border-b border-outline-variant">
+<button class="pb-3 text-primary font-bold border-b-2 border-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="grid_view">grid_view</span>
+                    概览
+                </button>
+<button class="pb-3 text-secondary hover:text-on-surface transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="checklist">checklist</span>
+                    任务列表
+                </button>
+<button class="pb-3 text-secondary hover:text-on-surface transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="group">group</span>
+                    成员
+                </button>
+<button class="pb-3 text-secondary hover:text-on-surface transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="timeline">timeline</span>
+                    时间线
+                </button>
+</div>
+</section>
+<!-- Main Dashboard Content -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Left: Overview Stats & Tables -->
+<div class="col-span-12 lg:col-span-8 space-y-gutter">
+<!-- Metrics Grid -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+<div class="tonal-card p-lg rounded-xl">
+<p class="text-body-sm font-bold text-secondary mb-2">进度</p>
+<div class="flex items-end justify-between">
+<h3 class="font-headline-lg text-on-surface">68%</h3>
+<span class="text-body-sm text-green-600 font-medium flex items-center">
+<span class="material-symbols-outlined text-[16px]" data-icon="trending_up">trending_up</span>
+                                +5%
+                            </span>
+</div>
+<div class="mt-4 h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 68%;"></div>
+</div>
+</div>
+<div class="tonal-card p-lg rounded-xl">
+<p class="text-body-sm font-bold text-secondary mb-2">任务统计</p>
+<h3 class="font-headline-lg text-on-surface">24/35</h3>
+<p class="text-body-sm text-secondary mt-1">剩余 11 项任务</p>
+</div>
+<div class="tonal-card p-lg rounded-xl">
+<p class="text-body-sm font-bold text-secondary mb-2">截止日期</p>
+<h3 class="font-headline-lg text-on-surface">2024-12-31</h3>
+<p class="text-body-sm text-error mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="schedule">schedule</span>
+                            剩余 45 天
+                        </p>
+</div>
+<div class="tonal-card p-lg rounded-xl">
+<p class="text-body-sm font-bold text-secondary mb-2">负责人</p>
+<div class="flex items-center gap-3">
+<img alt="张伟 Avatar" class="w-10 h-10 rounded-full border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTOsG6RuZcDjZSs2S9yckB5Kg26NRNugeeFiziy4cYInon2gBP7PlC6yaLQUD6fOspkPllyFlmT92ij8pi2BvXmG9H1q_c6WnTofbQtk7LibrTa1Y2KMC_EnhJ2krfMyCBESdaGPiU_WeuiFfH7nZ45Jr_auQERXYs2biCgOoKYSx2DqbR3DxJ9SvzsnOfCKPYkItBlq7r14rVNGyMKi_YxHUCj-JYG6aam3DzpIbR6sNxHgdI6qLYhSTbN8RaRofMz6xJ591XdDs"/>
+<div>
+<p class="font-label-md text-on-surface">张伟</p>
+<p class="text-body-sm text-secondary">架构师</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Tasks Table -->
+<div class="tonal-card rounded-xl overflow-hidden">
+<div class="px-lg py-md border-b border-outline-variant flex justify-between items-center">
+<h2 class="font-headline-md text-on-surface">近期任务</h2>
+<button class="text-primary font-label-md hover:underline">查看全部</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-surface-container-low">
+<tr>
+<th class="px-lg py-3 font-label-md text-secondary">任务名称</th>
+<th class="px-lg py-3 font-label-md text-secondary">状态</th>
+<th class="px-lg py-3 font-label-md text-secondary">优先级</th>
+<th class="px-lg py-3 font-label-md text-secondary">截止日期</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container-high transition-colors">
+<td class="px-lg py-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary" data-icon="article">article</span>
+<span class="font-medium">路由系统重构</span>
+</div>
+</td>
+<td class="px-lg py-4">
+<span class="px-2 py-0.5 rounded text-body-sm bg-green-100 text-green-700">Completed</span>
+</td>
+<td class="px-lg py-4">
+<span class="text-body-sm text-secondary">Medium</span>
+</td>
+<td class="px-lg py-4 text-body-sm">2024-11-10</td>
+</tr>
+<tr class="hover:bg-surface-container-high transition-colors">
+<td class="px-lg py-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary" data-icon="analytics">analytics</span>
+<span class="font-medium">性能基准测试</span>
+</div>
+</td>
+<td class="px-lg py-4">
+<span class="px-2 py-0.5 rounded text-body-sm bg-blue-100 text-blue-700">In Progress</span>
+</td>
+<td class="px-lg py-4">
+<span class="text-body-sm text-error font-bold">High</span>
+</td>
+<td class="px-lg py-4 text-body-sm">2024-11-20</td>
+</tr>
+<tr class="hover:bg-surface-container-high transition-colors">
+<td class="px-lg py-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary" data-icon="palette">palette</span>
+<span class="font-medium">UI 组件库同步</span>
+</div>
+</td>
+<td class="px-lg py-4">
+<span class="px-2 py-0.5 rounded text-body-sm bg-gray-100 text-gray-700">Pending</span>
+</td>
+<td class="px-lg py-4">
+<span class="text-body-sm text-secondary">Low</span>
+</td>
+<td class="px-lg py-4 text-body-sm">2024-11-25</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Right: Side Panel -->
+<div class="col-span-12 lg:col-span-4 space-y-gutter">
+<!-- Project Visual -->
+<div class="tonal-card rounded-xl overflow-hidden">
+<img alt="Project Frontend Architecture Visualization" class="w-full h-48 object-cover" data-alt="A professional, clean digital visualization of a modern web application's frontend architecture diagram. The aesthetic features crisp white and blue-gray tones with glowing data nodes and connections on a clean white background. The lighting is bright and architectural, reflecting a high-end enterprise software development environment. The style is minimalist corporate with a focus on organized complexity and technological efficiency." src="https://lh3.googleusercontent.com/aida-public/AB6AXuANiEBBP7Wa2qOdNH5GKWDHa2HCDVGD0mLVilh1rmmvsDMhXbltynaxP6qJbDngO7Wy5HGy8GhFP3OD-QAZ_uOkcMvF3QXNQqg7cLAgMQubtEk5QF_4rW94i0J25j8bCVcNtNaZlr684_3hYJguJDMC5gkm9qJHrVqFYb6Ku3Y19zKpguNKYvPmMyAk4rOpVpFvJa9lwrRIrZ8WCTQWNTwRbV9MjPAeNee5Zl4-VFPNQPAFXXI0V8Oeshgj68H7wU-Yl4Z1dE0SHs0"/>
+<div class="p-lg">
+<h3 class="font-label-md text-on-surface mb-2">项目概况</h3>
+<p class="text-body-sm text-secondary mb-4">当前架构正在向微前端模型过渡，预计将提升 40% 的构建速度。</p>
+<button class="w-full py-2 border border-outline text-on-surface rounded-lg font-label-md hover:bg-surface-container-high transition-colors">
+                            查看技术文档
+                        </button>
+</div>
+</div>
+<!-- Key Milestones -->
+<div class="tonal-card p-lg rounded-xl">
+<h3 class="font-headline-md text-on-surface mb-lg">关键里程碑</h3>
+<div class="space-y-6 relative">
+<div class="absolute left-[11px] top-2 bottom-2 w-0.5 bg-surface-container"></div>
+<div class="relative flex gap-4">
+<div class="w-[24px] h-[24px] rounded-full bg-green-500 border-4 border-surface-container-lowest z-10 flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-[12px] font-bold" data-icon="check" style="font-variation-settings: 'wght' 700;">check</span>
+</div>
+<div>
+<p class="font-label-md text-on-surface">Design Review (Completed)</p>
+<p class="text-body-sm text-secondary">Oct 28, 2024</p>
+</div>
+</div>
+<div class="relative flex gap-4">
+<div class="w-[24px] h-[24px] rounded-full bg-primary border-4 border-surface-container-lowest z-10 flex items-center justify-center animate-pulse">
+<div class="w-2 h-2 rounded-full bg-white"></div>
+</div>
+<div>
+<p class="font-label-md text-on-surface">Alpha Release</p>
+<p class="text-body-sm text-primary font-medium">Nov 15, 2024 (Next week)</p>
+</div>
+</div>
+<div class="relative flex gap-4">
+<div class="w-[24px] h-[24px] rounded-full bg-surface-container border-4 border-surface-container-lowest z-10"></div>
+<div>
+<p class="font-label-md text-secondary">Beta Integration</p>
+<p class="text-body-sm text-secondary">Dec 10, 2024</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Project Team -->
+<div class="tonal-card p-lg rounded-xl">
+<h3 class="font-label-md text-on-surface mb-md">核心成员</h3>
+<div class="flex -space-x-2">
+<img alt="Member 1" class="w-10 h-10 rounded-full border-2 border-surface-container-lowest" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKTkOnjG0EEyRTXdZs_VT2c5sNouKl-ZSWKR7y85MsU9eGsne6kngEbPXITAky3DYAbfafmpj1mqM6beKy_hKKuUWG_fBdS4tJsbAN9JekDD-AvISlmNpxquoY87LSGjtPv-8zO2drVL-XpclrSydjwWEzwug5nYH3G6enJNt5tAIdpHJPLO4Hpp24ryovV7qZApyVDIDI4warfDJg86Hsu7EArrpPCd6I2V2VyvdX5mukBH1btxHdRDTttw7ARv3oDIlfHSHTCuk"/>
+<img alt="Member 2" class="w-10 h-10 rounded-full border-2 border-surface-container-lowest" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUDcdV3xTygCAdRITEq5t-i0rxZaxD_NHeCmTT9UkE82AXB5X6KR39CHxc17Xd7moDVKeH7kBobP7z1yuhl_MmSkUWMKbAGK-rt6cmheZppUIR7WvV-VtjpvpG-AbSfS2bXP2_K54g4DaYQJC9CFE9PJrKxAl0mDnRdqJPIxquLMCdWIvbBuj0sA8I-Pi3IN5Q21-Z8kaFUD81K7s8DWijpTffgendeIZIiQuF5qqt60rIQkQVcxM7ONGtAVRw8eD2iEnBj9qA0pU"/>
+<img alt="Member 3" class="w-10 h-10 rounded-full border-2 border-surface-container-lowest" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCR0GFfd3rphqt0NuChn6b06aj1VMyeEXFUqf1Xo_vhi-96660hf9-0FwekHI38Xzf4AbkFW_rIzwmd56n4RIbUwVQ1xgXrKhEJ8gVXn2U5B3YZaazcZRER7s0ErSqL-XvwNZxC0sIxPM_b87yilexnZ5ZbYc2Ot9RLUImuPLoMhKlsoigzu9vKZkmW7aXL_Sz3dzkv7PMD7I6HvgqI99grv9sXjeXkKxgvMoyWzkPkjLVdW1IbnfEy2KoKNWLhRJ6zohM5w_yQeK8"/>
+<img alt="Member 4" class="w-10 h-10 rounded-full border-2 border-surface-container-lowest" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAouK-urNKtS6jt4vb5xo8VqJXtGhRw6lsP1EztGE_hge18KAG3xU3ZYl5cYZGhA8vPyuXOikiRhS3bWmoGXxFw7tvqWIjOqPMnQSEC_AXcqlrZeu8Od5_kbTqodA0ZcBe3Er2oqxmYuJW9EBsAjhQ4M_CdYHr0lWxfpTnwTxXNxXmlYlob4pc-VzTCPs99gF0kJw_zMYvWiiXBsPpRvFIMsKFPIptps77zI3-CcUL3DsSuDRsZstvYDx_3HC0FI3JPX9Lz884UurE"/>
+<div class="w-10 h-10 rounded-full border-2 border-surface-container-lowest bg-surface-container flex items-center justify-center text-body-sm text-secondary font-bold">
+                            +12
+                        </div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Simple micro-interaction for tab switching placeholder
+        const tabs = document.querySelectorAll('button[class*="pb-3"]');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => {
+                    t.classList.remove('text-primary', 'font-bold', 'border-b-2', 'border-primary');
+                    t.classList.add('text-secondary');
+                });
+                tab.classList.add('text-primary', 'font-bold', 'border-b-2', 'border-primary');
+                tab.classList.remove('text-secondary');
+            });
+        });
+    </script>
+</body></html>

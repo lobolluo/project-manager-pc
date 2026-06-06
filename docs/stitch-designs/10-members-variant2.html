@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ProFlow - 项目成员</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#444650",
+                        "outline-variant": "#c4c6d2",
+                        "tertiary-fixed": "#d4e3ff",
+                        "secondary-container": "#cfe2f9",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#e0e3e6",
+                        "surface-container-low": "#f2f4f7",
+                        "surface-container": "#eceef1",
+                        "inverse-surface": "#2d3133",
+                        "on-tertiary": "#ffffff",
+                        "on-background": "#191c1e",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#191c1e",
+                        "on-tertiary-fixed": "#001c39",
+                        "background": "#f7f9fc",
+                        "tertiary-fixed-dim": "#a4c9ff",
+                        "on-secondary-fixed": "#091d2e",
+                        "on-tertiary-fixed-variant": "#004883",
+                        "on-secondary-fixed-variant": "#36485b",
+                        "surface-bright": "#f7f9fc",
+                        "on-primary-fixed": "#001944",
+                        "outline": "#747781",
+                        "tertiary": "#00447d",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed-dim": "#b5c8df",
+                        "primary": "#21417f",
+                        "on-tertiary-container": "#b9d5ff",
+                        "surface-container-highest": "#e0e3e6",
+                        "primary-container": "#3b5998",
+                        "primary-fixed-dim": "#afc6ff",
+                        "surface": "#f7f9fc",
+                        "on-secondary-container": "#526478",
+                        "surface-tint": "#3f5d9c",
+                        "on-primary-fixed-variant": "#254583",
+                        "inverse-primary": "#afc6ff",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#d9e2ff",
+                        "secondary-fixed": "#d1e4fb",
+                        "inverse-on-surface": "#eff1f4",
+                        "on-primary-container": "#c2d2ff",
+                        "tertiary-container": "#005ca5",
+                        "surface-dim": "#d8dadd",
+                        "secondary": "#4e6073",
+                        "on-error": "#ffffff",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#e6e8eb",
+                        "on-secondary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "margin-mobile": "16px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "gutter": "20px",
+                        "sm": "8px",
+                        "2xl": "48px",
+                        "base": "4px",
+                        "xl": "32px",
+                        "margin-desktop": "32px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["13px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-sm": ["12px", {"lineHeight": "18px", "fontWeight": "400"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-xl": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface">
+<!-- Sidebar Navigation -->
+<aside class="fixed left-0 top-0 h-full w-[260px] z-50 bg-on-surface-variant border-r border-outline-variant shadow-md flex flex-col py-lg">
+<div class="px-lg mb-xl">
+<h1 class="font-headline-md text-headline-md font-black text-surface-container-lowest">ProFlow</h1>
+<p class="font-label-md text-label-md text-outline-variant">Management Suite</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 text-outline-variant hover:text-surface-container-lowest px-4 py-3 hover:bg-secondary/10 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 text-surface-container-lowest font-bold bg-secondary/20 border-l-4 border-primary-fixed px-4 py-3 scale-100 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="assignment">assignment</span>
+<span class="font-label-md text-label-md">Projects</span>
+</a>
+<a class="flex items-center gap-3 text-outline-variant hover:text-surface-container-lowest px-4 py-3 hover:bg-secondary/10 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="check_box">check_box</span>
+<span class="font-label-md text-label-md">Tasks</span>
+</a>
+<a class="flex items-center gap-3 text-outline-variant hover:text-surface-container-lowest px-4 py-3 hover:bg-secondary/10 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-label-md text-label-md">Team</span>
+</a>
+<a class="flex items-center gap-3 text-outline-variant hover:text-surface-container-lowest px-4 py-3 hover:bg-secondary/10 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="bar_chart">bar_chart</span>
+<span class="font-label-md text-label-md">Reporting</span>
+</a>
+</nav>
+<div class="mt-auto pt-lg border-t border-outline-variant/20">
+<a class="flex items-center gap-3 text-outline-variant hover:text-surface-container-lowest px-4 py-3 hover:bg-secondary/10" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-label-md text-label-md">Help Center</span>
+</a>
+<a class="flex items-center gap-3 text-outline-variant hover:text-surface-container-lowest px-4 py-3 hover:bg-secondary/10" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-label-md text-label-md">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Wrapper -->
+<div class="ml-[260px] min-h-screen flex flex-col">
+<!-- Top Navigation Bar -->
+<header class="bg-surface sticky top-0 z-40 h-16 w-full px-margin-desktop flex justify-between items-center shadow-sm border-b border-outline-variant">
+<div class="flex items-center gap-2">
+<nav class="flex text-on-surface-variant font-body-md text-body-md items-center gap-2">
+<a class="hover:text-primary" href="#">项目</a>
+<span class="material-symbols-outlined text-[16px]" data-icon="chevron_right">chevron_right</span>
+<span class="text-on-surface font-bold">前端重构项目</span>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer" data-icon="notifications">notifications</span>
+<span class="absolute -top-1 -right-1 w-2 h-2 bg-error rounded-full"></span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer" data-icon="settings">settings</span>
+<div class="w-8 h-8 rounded-full bg-primary-container overflow-hidden border border-outline-variant">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A professional headshot of a senior software architect, high-quality corporate photography, natural morning light, studio background with soft bokeh, sophisticated blue-gray color palette reflecting a corporate modern environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9ZZsdj2pQVu1GjTJFR0WbQZ0uHJHkGgmhyEo4O6SuIkTaQRR-_V5ssNSX-S8F71tk66_9WMya93_z7XHIcdie_vchTviho_OHMMzGLHG4_6Oj1iL1FfMlwUlAWw9RgyDqJd-am0xuKcjM5EkvNMHdai5riw17qK1vozmh9j8goWdOQQiBNq3ULYNlDoR_u5QT5A_miK-Ge9cgkhxW0Mv53aXN8T0uFlUCZQmhu8qs0gpgI2naSvBVcEvEMZ-HU4dNWtWXujcWvlI"/>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<main class="p-margin-desktop max-w-[1400px] w-full mx-auto">
+<!-- Project Header Section -->
+<div class="mb-lg flex flex-col md:flex-row md:items-end justify-between gap-md">
+<div>
+<div class="flex items-center gap-3 mb-2">
+<h2 class="font-headline-lg text-headline-lg text-primary">前端重构项目</h2>
+<span class="px-2 py-0.5 bg-secondary-container text-on-secondary-container rounded-lg font-label-md text-label-md">进行中</span>
+</div>
+<div class="flex border-b border-outline-variant">
+<button class="px-lg py-3 font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors">概览</button>
+<button class="px-lg py-3 font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors">任务列表</button>
+<button class="px-lg py-3 font-body-md text-body-md text-primary font-bold border-b-2 border-primary">成员</button>
+<button class="px-lg py-3 font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors">时间线</button>
+</div>
+</div>
+<div class="pb-3">
+<button class="flex items-center gap-2 bg-primary text-on-primary px-lg py-2.5 rounded-xl font-label-md text-label-md shadow-sm hover:bg-primary-container transition-colors active:scale-95">
+<span class="material-symbols-outlined" data-icon="person_add">person_add</span>
+                        邀请成员
+                    </button>
+</div>
+</div>
+<!-- Members Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Member Card 1 -->
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-shadow group">
+<div class="flex justify-between items-start mb-md">
+<div class="w-16 h-16 rounded-full overflow-hidden border-2 border-primary-fixed">
+<img alt="Member Avatar" class="w-full h-full object-cover" data-alt="Close up portrait of a professional product manager in a modern office setting. The lighting is crisp and clean, highlighting a focused and friendly expression. The background features high-end architectural elements in shades of white and gray, consistent with a professional corporate modern style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhh2qA6WaKXnPpt2zMz03XUBR2UieY7xcNJfA8cPZ07Xl-slM9ywhHkLd98zMTrGafL1pgoN0nC0kYS6YsPnroM3zbHkQe4XpjVm2hBUlojHuYzC2e0UPankCH-4aVX0dwH93-71u1t6pyg3f_avdQDDJKWlsBSvHsUP9HqMF15OP1qr0896-hXlmeofTX7UglXut5JfBAQixqhtbKE4XePokJlwVhAGkyQbUQUY6hYjkhocfyFTM4qnc6vpuxU8JDMyMWyIzRmvI"/>
+</div>
+<button class="text-outline-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+<div class="mb-lg">
+<h3 class="font-headline-md text-headline-md text-on-surface">张明远</h3>
+<span class="inline-block mt-1 px-2 py-0.5 bg-tertiary-fixed text-on-tertiary-fixed-variant rounded font-label-md text-label-md">产品经理</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[16px]" data-icon="mail">mail</span>
+<span>mingyuan.zhang@proflow.com</span>
+</div>
+</div>
+<!-- Member Card 2 -->
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-md">
+<div class="w-16 h-16 rounded-full overflow-hidden border-2 border-primary-fixed">
+<img alt="Member Avatar" class="w-full h-full object-cover" data-alt="Portrait of a female front-end developer with a creative and analytical gaze. The aesthetic is clean and contemporary, with soft-key lighting that emphasizes textures. The setting is a minimalist tech hub with neutral tones and corporate blue accents, providing a professional high-fidelity feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJEesua7tEjpkPzuXBn4CAGU8pMV9jDgRqVn2cCx1Dwml4PAeMVxgswS8NMv7bouOZR1Ehtk6DJQHjjqgx_7v-h84-GVbZ1ApmohoMNnbOc1g4ZIl8DM5TBJS9WQjRvgV8TxkCgV_J-4KdZJOVSYS_QCach0dBZGbaBGMdxgQ9dfNJCAsf-J6G6ZKfTvN0mMgpTonWQfeysSnq6i43rVyiI-gPRa1_YC1n7ffVoFI9a3pRvALApodS0ATdYV3HeWAYRc1i0g-tfc0"/>
+</div>
+<button class="text-outline-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+<div class="mb-lg">
+<h3 class="font-headline-md text-headline-md text-on-surface">李思齐</h3>
+<span class="inline-block mt-1 px-2 py-0.5 bg-secondary-fixed text-on-secondary-fixed-variant rounded font-label-md text-label-md">前端开发</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[16px]" data-icon="mail">mail</span>
+<span>siqi.li@proflow.com</span>
+</div>
+</div>
+<!-- Member Card 3 -->
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-md">
+<div class="w-16 h-16 rounded-full overflow-hidden border-2 border-primary-fixed">
+<img alt="Member Avatar" class="w-full h-full object-cover" data-alt="A creative UI designer portrait set against a backdrop of organized design boards and subtle ambient light. The style is professional and sophisticated, emphasizing clear visual hierarchy and a clean white-and-blue color palette that matches a corporate modern design system." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJYsxrha307ruqOXE9huvhM5sSeyvJrlIid8ZwYYsnZ7FolOnCIj30Kt4X5zvUIuuTPo4EySRkbKdXKoLJFpljysuRb6NjjsrD92MIuudHektNOxRmHNy6RBuXWETPNFj1sv6siEegkDmA9xoKBgBhRPguA0B62AL9ZrJpT3Tj_QgsKojIFYOoFhjQu9EOfdWqnuvmWjpY8au_4XemfcG7npljnMk7ksrTXUDxdetQhx5RRTaCnYgYY3UusLwYGW_UkUGqf5yR8LI"/>
+</div>
+<button class="text-outline-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+<div class="mb-lg">
+<h3 class="font-headline-md text-headline-md text-on-surface">陈子璇</h3>
+<span class="inline-block mt-1 px-2 py-0.5 bg-primary-fixed text-on-primary-fixed-variant rounded font-label-md text-label-md">UI设计师</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[16px]" data-icon="mail">mail</span>
+<span>zixuan.chen@proflow.com</span>
+</div>
+</div>
+<!-- Member Card 4 -->
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-md">
+<div class="w-16 h-16 rounded-full overflow-hidden border-2 border-primary-fixed">
+<img alt="Member Avatar" class="w-full h-full object-cover" data-alt="A focused junior developer in a collaborative workspace. The image is captured with professional depth-of-field, focusing on the subject while softly blurring the modern office environment. The color temperature is neutral to cool, aligning with the project's efficient and organized brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuASxewc0Iv7IQEylWDKZPP3HCy2N-jerYVjwrs95GpV9Cns8Z9_59ULFyTPtOUQ9TLucmaj7BDkTYE8zl17mgxJCitP0ZL1AKJ2VJD9_oXGipJCUg27YSNfiqG8tYxNNmCErMpXOXHS4rJCWOuNUq78wYrSQrw77-F2Np4ofZ6n2FinAtuWedFOWITXsXCjVhT_DbW5z_6RU6pdZF8n2PKk0bzmUUQjCOaejJvY4WoQ2aUGBP4BhAn_kZyL4JApvsJRu9AtnlXvUUY"/>
+</div>
+<button class="text-outline-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+<div class="mb-lg">
+<h3 class="font-headline-md text-headline-md text-on-surface">王晓东</h3>
+<span class="inline-block mt-1 px-2 py-0.5 bg-secondary-fixed text-on-secondary-fixed-variant rounded font-label-md text-label-md">前端开发</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[16px]" data-icon="mail">mail</span>
+<span>xiaodong.wang@proflow.com</span>
+</div>
+</div>
+<!-- Member Card 5 -->
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-md">
+<div class="w-16 h-16 rounded-full overflow-hidden border-2 border-primary-fixed">
+<img alt="Member Avatar" class="w-full h-full object-cover" data-alt="A senior quality assurance engineer in a modern, bright office space. The visual style is high-performance and systematic, using a palette of whites, grays, and corporate blues. The lighting is diffused and professional, creating an atmosphere of reliability and professional focus." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOKHFPjEcQ11EWokOdkxQm7H11IJBhNkJzCv7T7qFw7MjW2Yq5NM0XeUS-nko3xjkCEigjGFZzvKk2T7ZyYUUnTiqxd4iBbQ_a6PSRBMcIbGeoZ7n50iH3Q1gCR5zcgHAuDiHE5QqZl9EH_ifqQSG02VxSaBN3FA0GCpcDydQLt0wOzN9nEXUDAN5ZpmkuvPKvBFKGcXOCFRtC4aSMhMOGfbnAFqDTfuyOIQPf6dOBc3m1UNtDhw4TyN7LEC03-7Bx2M-PlMW_i-E"/>
+</div>
+<button class="text-outline-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+<div class="mb-lg">
+<h3 class="font-headline-md text-headline-md text-on-surface">周丽华</h3>
+<span class="inline-block mt-1 px-2 py-0.5 bg-tertiary-fixed text-on-tertiary-fixed-variant rounded font-label-md text-label-md">测试工程师</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[16px]" data-icon="mail">mail</span>
+<span>lihua.zhou@proflow.com</span>
+</div>
+</div>
+<!-- Member Card 6 -->
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-md">
+<div class="w-16 h-16 rounded-full overflow-hidden border-2 border-primary-fixed">
+<img alt="Member Avatar" class="w-full h-full object-cover" data-alt="A portrait of a technical lead in a sophisticated workspace. The image uses ambient shadows to create depth and hierarchy, staying true to a corporate modern aesthetic. The lighting is soft but directed, highlighting a professional and composed demeanor in a clean, high-tech environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDE0ex5IizlnaDQxapsPgX6C6jOUpnllXjTDDnbHouzU2_x0vjFW4K3CeV_qtE4EGp0zPmAyr1qSoLLZR4QNDdmto85BZmxzzoctQtG-fPTRAgxUNTTzlsArHOGtp6Sf9G9oJZ9ijvqddsPmuAh97TeRBB_ScnfazPwxSQEBV3hjK_ly1tJfytXrSR85-uVUDaodASCVz3wq1fx8iXMdxxqpilKYClLo0lpQO3-tlMh-5pHAUeoZLrbd-bLBcuo2OoG4sF7PXtMCqs"/>
+</div>
+<button class="text-outline-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+<div class="mb-lg">
+<h3 class="font-headline-md text-headline-md text-on-surface">赵志远</h3>
+<span class="inline-block mt-1 px-2 py-0.5 bg-primary-fixed text-on-primary-fixed-variant rounded font-label-md text-label-md">技术负责人</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[16px]" data-icon="mail">mail</span>
+<span>zhiyuan.zhao@proflow.com</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer / Bottom Spacer -->
+<footer class="mt-auto py-lg border-t border-outline-variant/30 px-margin-desktop text-center">
+<p class="font-body-sm text-body-sm text-outline-variant">© 2024 ProFlow Management Suite. All rights reserved.</p>
+</footer>
+</div>
+<!-- Micro-interaction Scripts -->
+<script>
+        document.querySelectorAll('.group').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-4px)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0px)';
+            });
+        });
+    </script>
+</body></html>

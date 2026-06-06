@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>项目详情 - ProFlow Enterprise</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fc;
+        }
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background-color: #e1e4e8;
+        }
+        @media (max-width: 768px) {
+            .timeline-container::before {
+                left: 24px;
+            }
+        }
+    </script>
+    <script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-container": "#005ca5",
+                      "on-secondary-fixed-variant": "#36485b",
+                      "on-primary": "#ffffff",
+                      "inverse-primary": "#afc6ff",
+                      "secondary": "#4e6073",
+                      "background": "#f7f9fc",
+                      "tertiary": "#00447d",
+                      "outline-variant": "#c4c6d2",
+                      "tertiary-fixed": "#d4e3ff",
+                      "primary-container": "#3b5998",
+                      "primary-fixed-dim": "#afc6ff",
+                      "on-background": "#191c1e",
+                      "surface-bright": "#f7f9fc",
+                      "on-primary-fixed": "#001944",
+                      "primary": "#21417f",
+                      "on-error": "#ffffff",
+                      "surface-container-high": "#e6e8eb",
+                      "on-secondary-fixed": "#091d2e",
+                      "secondary-fixed-dim": "#b5c8df",
+                      "on-tertiary-container": "#b9d5ff",
+                      "surface-dim": "#d8dadd",
+                      "primary-fixed": "#d9e2ff",
+                      "on-secondary": "#ffffff",
+                      "inverse-on-surface": "#eff1f4",
+                      "tertiary-fixed-dim": "#a4c9ff",
+                      "surface-container": "#eceef1",
+                      "on-surface-variant": "#444650",
+                      "surface-variant": "#e0e3e6",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-container-low": "#f2f4f7",
+                      "error-container": "#ffdad6",
+                      "outline": "#747781",
+                      "secondary-fixed": "#d1e4fb",
+                      "surface-container-highest": "#e0e3e6",
+                      "on-tertiary-fixed": "#001c39",
+                      "surface-tint": "#3f5d9c",
+                      "on-secondary-container": "#526478",
+                      "on-tertiary": "#ffffff",
+                      "on-surface": "#191c1e",
+                      "on-tertiary-fixed-variant": "#004883",
+                      "on-error-container": "#93000a",
+                      "error": "#ba1a1a",
+                      "secondary-container": "#cfe2f9",
+                      "on-primary-fixed-variant": "#254583",
+                      "on-primary-container": "#c2d2ff",
+                      "inverse-surface": "#2d3133",
+                      "surface": "#f7f9fc"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "lg": "24px",
+                      "xl": "32px",
+                      "base": "4px",
+                      "sm": "8px",
+                      "md": "16px",
+                      "margin-desktop": "32px",
+                      "gutter": "20px",
+                      "margin-mobile": "16px",
+                      "xs": "4px",
+                      "2xl": "48px"
+              },
+              "fontFamily": {
+                      "label-md": ["Inter"],
+                      "headline-lg-mobile": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "body-md": ["Inter"],
+                      "headline-xl": ["Inter"],
+                      "body-sm": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "headline-xl-mobile": ["Inter"]
+              },
+              "fontSize": {
+                      "label-md": ["13px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "headline-lg-mobile": ["22px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "headline-xl": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-sm": ["12px", {"lineHeight": "18px", "fontWeight": "400"}],
+                      "headline-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "headline-xl-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+      </script>
+</head>
+<body class="bg-background text-on-surface">
+
+    <!-- Sidebar Navigation -->
+    <aside class="fixed left-0 top-0 h-screen w-[260px] bg-surface-container flex flex-col py-lg gap-sm border-r border-outline-variant z-50">
+        <div class="px-md mb-xl">
+            <div class="flex items-center gap-sm">
+                <div class="w-10 h-10 bg-primary-container rounded-lg flex items-center justify-center text-on-primary-container">
+                    <span class="material-symbols-outlined" data-icon="folder_managed">folder_managed</span>
+                </div>
+                <div>
+                    <h1 class="font-headline-md text-headline-md font-bold text-on-surface">Project Space</h1>
+                    <p class="font-label-md text-label-md text-on-surface-variant opacity-70">Standard Plan</p>
+                </div>
+            </div>
+        </div>
+
+        <nav class="flex-1 px-sm space-y-1">
+            <a href="#" class="flex items-center gap-md text-on-surface-variant hover:text-on-surface px-md py-sm transition-all hover:bg-surface-container-highest rounded-lg">
+                <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                <span class="font-label-md text-label-md">Dashboard</span>
+            </a>
+            <a href="#" class="flex items-center gap-md text-on-surface-variant hover:text-on-surface px-md py-sm transition-all hover:bg-surface-container-highest rounded-lg">
+                <span class="material-symbols-outlined" data-icon="view_kanban">view_kanban</span>
+                <span class="font-label-md text-label-md">Kanban Board</span>
+            </a>
+            <a href="#" class="flex items-center gap-md bg-primary-container text-on-primary-container rounded-lg px-md py-sm border-l-4 border-primary">
+                <span class="material-symbols-outlined" data-icon="folder_open">folder_open</span>
+                <span class="font-label-md text-label-md">Projects</span>
+            </a>
+            <a href="#" class="flex items-center gap-md text-on-surface-variant hover:text-on-surface px-md py-sm transition-all hover:bg-surface-container-highest rounded-lg">
+                <span class="material-symbols-outlined" data-icon="group">group</span>
+                <span class="font-label-md text-label-md">Team</span>
+            </a>
+            <a href="#" class="flex items-center gap-md text-on-surface-variant hover:text-on-surface px-md py-sm transition-all hover:bg-surface-container-highest rounded-lg">
+                <span class="material-symbols-outlined" data-icon="settings">settings</span>
+                <span class="font-label-md text-label-md">Settings</span>
+            </a>
+        </nav>
+
+        <div class="px-md pt-lg">
+            <button class="w-full bg-primary text-on-primary py-sm px-md rounded-xl font-label-md text-label-md flex items-center justify-center gap-xs shadow-sm hover:brightness-110 active:scale-95 transition-all">
+                <span class="material-symbols-outlined" data-icon="add">add</span>
+                New Project
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="ml-[260px] min-h-screen flex flex-col">
+        
+        <!-- Top Navigation Bar -->
+        <header class="h-16 w-full sticky top-0 z-40 bg-surface-container-lowest border-b border-outline-variant flex justify-between items-center px-lg shadow-sm">
+            <div class="flex items-center gap-lg flex-1">
+                <span class="font-headline-md text-headline-md text-primary font-bold">ProFlow Enterprise</span>
+                <div class="relative w-96 max-w-full">
+                    <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="search">search</span>
+                    <input type="text" placeholder="Search tasks, projects, or team members..." class="w-full pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-lg font-body-sm text-body-sm focus:ring-2 focus:ring-primary-container">
+                </div>
+            </div>
+            <div class="flex items-center gap-md">
+                <button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors">
+                    <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+                </button>
+                <button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors">
+                    <span class="material-symbols-outlined" data-icon="help">help</span>
+                </button>
+                <div class="h-8 w-px bg-outline-variant mx-sm"></div>
+                <div class="flex items-center gap-sm cursor-pointer hover:bg-surface-container-low p-1 rounded-lg transition-colors">
+                    <img src="https://openui.fly.dev/openui/24x24.svg?text=ZW" alt="User profile" class="w-8 h-8 rounded-full border border-outline-variant">
+                    <span class="font-label-md text-label-md text-on-surface">张伟</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Project Detail Header -->
+        <div class="px-xl pt-xl pb-md">
+            <!-- Breadcrumbs -->
+            <nav class="flex items-center gap-xs text-on-surface-variant font-label-md text-label-md mb-md">
+                <a href="#" class="hover:text-primary transition-colors">项目</a>
+                <span class="material-symbols-outlined text-[16px]" data-icon="chevron_right">chevron_right</span>
+                <span class="text-on-surface">前端重构项目</span>
+            </nav>
+
+            <div class="flex items-end justify-between gap-lg mb-lg">
+                <div class="space-y-sm">
+                    <div class="flex items-center gap-md">
+                        <h2 class="font-headline-xl text-headline-xl text-on-surface">前端重构项目</h2>
+                        <span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full font-label-md text-[12px] flex items-center gap-xs">
+                            <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                            进行中
+                        </span>
+                    </div>
+                    <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+                        Modernizing the frontend architecture to improve performance and developer experience. 采用最新的 React 技术栈与模块化架构。
+                    </p>
+                </div>
+                <div class="flex gap-md">
+                    <button class="px-md py-sm border border-outline text-on-surface rounded-lg font-label-md text-label-md flex items-center gap-sm hover:bg-surface-container transition-colors">
+                        <span class="material-symbols-outlined" data-icon="share">share</span>
+                        分享
+                    </button>
+                    <button class="px-md py-sm bg-primary text-on-primary rounded-lg font-label-md text-label-md flex items-center gap-sm shadow-sm hover:brightness-110 active:scale-95 transition-all">
+                        <span class="material-symbols-outlined" data-icon="edit">edit</span>
+                        编辑项目
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="flex gap-xl border-b border-outline-variant overflow-x-auto no-scrollbar">
+                <button onclick="switchTab('overview')" class="tab-btn active-tab relative py-3 font-label-md text-label-md text-primary border-b-2 border-primary transition-all">
+                    概览
+                </button>
+                <button onclick="switchTab('tasks')" class="tab-btn py-3 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-all">
+                    任务列表
+                </button>
+                <button onclick="switchTab('members')" class="tab-btn py-3 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-all">
+                    成员
+                </button>
+                <button onclick="switchTab('timeline')" class="tab-btn py-3 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-all">
+                    时间线
+                </button>
+            </div>
+        </div>
+
+        <!-- Tab Content -->
+        <div class="px-xl pb-xl flex-1">
+            
+            <!-- OVERVIEW SECTION -->
+            <section id="tab-overview" class="tab-content grid grid-cols-12 gap-lg">
+                <!-- Metrics Grid -->
+                <div class="col-span-12 grid grid-cols-4 gap-lg mb-md">
+                    <div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm flex flex-col gap-sm">
+                        <div class="flex justify-between items-start">
+                            <span class="text-on-surface-variant font-label-md text-label-md">当前进度</span>
+                            <span class="material-symbols-outlined text-primary" data-icon="trending_up">trending_up</span>
+                        </div>
+                        <div class="flex items-baseline gap-xs">
+                            <span class="font-headline-lg text-headline-lg text-on-surface">68%</span>
+                            <span class="text-primary font-label-md text-[12px]">+5% 本周</span>
+                        </div>
+                        <div class="w-full h-2 bg-surface-container rounded-full mt-sm overflow-hidden">
+                            <div class="h-full bg-primary rounded-full transition-all duration-1000" style="width: 68%;"></div>
+                        </div>
+                    </div>
+                    <div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm flex flex-col gap-sm">
+                        <div class="flex justify-between items-start">
+                            <span class="text-on-surface-variant font-label-md text-label-md">任务统计</span>
+                            <span class="material-symbols-outlined text-secondary" data-icon="assignment">assignment</span>
+                        </div>
+                        <div class="flex items-baseline gap-xs">
+                            <span class="font-headline-lg text-headline-lg text-on-surface">24/35</span>
+                            <span class="text-on-surface-variant font-label-md text-[12px]">个已完成</span>
+                        </div>
+                        <p class="font-body-sm text-body-sm text-on-surface-variant">剩余 11 个任务待办</p>
+                    </div>
+                    <div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm flex flex-col gap-sm">
+                        <div class="flex justify-between items-start">
+                            <span class="text-on-surface-variant font-label-md text-label-md">截止日期</span>
+                            <span class="material-symbols-outlined text-error" data-icon="calendar_today">calendar_today</span>
+                        </div>
+                        <div class="flex items-baseline gap-xs">
+                            <span class="font-headline-lg text-headline-lg text-on-surface">2024-12-31</span>
+                        </div>
+                        <p class="font-body-sm text-body-sm text-error">剩余 45 天</p>
+                    </div>
+                    <div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm flex flex-col gap-sm">
+                        <div class="flex justify-between items-start">
+                            <span class="text-on-surface-variant font-label-md text-label-md">负责人</span>
+                            <span class="material-symbols-outlined text-tertiary" data-icon="person">person</span>
+                        </div>
+                        <div class="flex items-center gap-md">
+                            <img src="https://openui.fly.dev/openui/32x32.svg?text=ZW" class="w-8 h-8 rounded-full border border-outline-variant">
+                            <div>
+                                <p class="font-label-md text-label-md text-on-surface">张伟</p>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant">架构师</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Tasks Table -->
+                <div class="col-span-8 bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm overflow-hidden">
+                    <div class="px-lg py-md border-b border-outline-variant flex justify-between items-center bg-surface-container-low">
+                        <h3 class="font-headline-md text-headline-md text-on-surface">近期任务</h3>
+                        <button class="text-primary font-label-md text-label-md hover:underline">查看全部</button>
+                    </div>
+                    <table class="w-full text-left">
+                        <thead class="bg-surface-container-low text-on-surface-variant font-label-md text-label-md">
+                            <tr>
+                                <th class="px-lg py-sm">任务名称</th>
+                                <th class="px-lg py-sm">状态</th>
+                                <th class="px-lg py-sm">优先级</th>
+                                <th class="px-lg py-sm">截止日期</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-outline-variant font-body-md text-body-md">
+                            <tr class="hover:bg-surface-container-low transition-colors group">
+                                <td class="px-lg py-md">
+                                    <div class="flex items-center gap-sm">
+                                        <span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform" data-icon="check_circle">check_circle</span>
+                                        优化核心首页渲染速度
+                                    </div>
+                                </td>
+                                <td class="px-lg py-md">
+                                    <span class="bg-green-100 text-green-800 px-2 py-0.5 rounded text-[11px] font-bold">已完成</span>
+                                </td>
+                                <td class="px-lg py-md text-error">紧急</td>
+                                <td class="px-lg py-md text-on-surface-variant">2024-11-15</td>
+                            </tr>
+                            <tr class="hover:bg-surface-container-low transition-colors group">
+                                <td class="px-lg py-md">
+                                    <div class="flex items-center gap-sm">
+                                        <span class="material-symbols-outlined text-on-surface-variant" data-icon="radio_button_unchecked">radio_button_unchecked</span>
+                                        重构样式组件库 (v2.0)
+                                    </div>
+                                </td>
+                                <td class="px-lg py-md">
+                                    <span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded text-[11px] font-bold">进行中</span>
+                                </td>
+                                <td class="px-lg py-md text-on-surface-variant">高</td>
+                                <td class="px-lg py-md text-on-surface-variant">2024-11-20</td>
+                            </tr>
+                            <tr class="hover:bg-surface-container-low transition-colors group">
+                                <td class="px-lg py-md">
+                                    <div class="flex items-center gap-sm">
+                                        <span class="material-symbols-outlined text-on-surface-variant" data-icon="radio_button_unchecked">radio_button_unchecked</span>
+                                        集成 E2E 自动化测试
+                                    </div>
+                                </td>
+                                <td class="px-lg py-md">
+                                    <span class="bg-surface-container-highest text-on-surface-variant px-2 py-0.5 rounded text-[11px] font-bold">待处理</span>
+                                </td>
+                                <td class="px-lg py-md text-on-surface-variant">中</td>
+                                <td class="px-lg py-md text-on-surface-variant">2024-11-25</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Project Visuals / Info -->
+                <div class="col-span-4 space-y-lg">
+                    <div class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm overflow-hidden aspect-video relative group">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Project Architecture Visualization" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A clean, professional workspace with multiple sleek computer monitors displaying complex software architecture diagrams and source code. The lighting is soft and natural, pouring in from a nearby window, creating a focused and productive atmosphere. The color palette consists of cool blues, crisp whites, and muted grays, reflecting a systematic and modern corporate identity.">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-lg">
+                            <span class="text-white font-label-md text-label-md">架构示意图 v1.2</span>
+                        </div>
+                    </div>
+                    <div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm">
+                        <h4 class="font-label-md text-label-md text-on-surface mb-md">项目关键节点</h4>
+                        <div class="space-y-md">
+                            <div class="flex items-center gap-md">
+                                <div class="w-2 h-2 rounded-full bg-primary"></div>
+                                <div class="flex-1">
+                                    <p class="font-body-sm text-body-sm text-on-surface">设计评审已通过</p>
+                                    <p class="text-[11px] text-on-surface-variant">2024-10-01</p>
+                                </div>
+                                <span class="material-symbols-outlined text-green-600 text-[18px]" data-icon="check">check</span>
+                            </div>
+                            <div class="flex items-center gap-md">
+                                <div class="w-2 h-2 rounded-full bg-primary"></div>
+                                <div class="flex-1">
+                                    <p class="font-body-sm text-body-sm text-on-surface">Alpha 版本发布</p>
+                                    <p class="text-[11px] text-on-surface-variant">2024-11-15</p>
+                                </div>
+                                <span class="material-symbols-outlined text-primary text-[18px]" data-icon="hourglass_empty">hourglass_empty</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- MEMBERS SECTION (Hidden by default) -->
+            <section id="tab-members" class="tab-content hidden">
+                <div class="flex justify-between items-center mb-lg">
+                    <h3 class="font-headline-md text-headline-md text-on-surface">项目团队成员 (6)</h3>
+                    <button class="bg-primary text-on-primary py-2 px-md rounded-lg font-label-md text-label-md flex items-center gap-sm shadow-sm hover:brightness-110 transition-all">
+                        <span class="material-symbols-outlined" data-icon="person_add">person_add</span>
+                        邀请成员
+                    </button>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg">
+                    <!-- Member Card 1 -->
+                    <div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm hover:border-primary transition-all group">
+                        <div class="flex items-center gap-lg">
+                            <img src="https://openui.fly.dev/openui/64x64.svg?text=ZW" class="w-16 h-16 rounded-full border-2 border-primary-container" alt="User Avatar">
+                            <div class="flex-1">
+                                <h4 class="font-headline-md text-on-surface group-hover:text-primary transition-colors">张伟</h4>
+                                <span class="bg-primary-container text-on-primary-container px-2 py-0.5 rounded font-label-md text-[11px]">Architect</span>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant mt-sm">zhangwei@proflow.com</p>
+                            </div>
+                            <button class="text-on-surface-variant hover:text-primary transition-colors">
+                                <span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Member Card 2 -->
+                    <div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm hover:border-primary transition-all group">
+                        <div class="flex items-center gap-lg">
+                            <img src="https://openui.fly.dev/openui/64x64.svg?text=LY" class="w-16 h-16 rounded-full border-2 border-outline-variant" alt="User Avatar">
+                            <div class="flex-1">
+                                <h4 class="font-headline-md text-on-surface group-hover:text-primary transition-colors">李悦</h4>
+                                <span class="bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded font-label-md text-[11px]">Designer</span>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant mt-sm">liyue@proflow.com</p>
+                            </div>
+                            <button class="text-on-surface-variant hover:text-primary transition-colors">
+                                <span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Member Card 3 -->
+                    <div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm hover:border-primary transition-all group">
+                        <div class="flex items-center gap-lg">
+                            <img src="https://openui.fly.dev/openui/64x64.svg?text=WF" class="w-16 h-16 rounded-full border-2 border-outline-variant" alt="User Avatar">
+                            <div class="flex-1">
+                                <h4 class="font-headline-md text-on-surface group-hover:text-primary transition-colors">王芳</h4>
+                                <span class="bg-tertiary-container text-on-tertiary-container px-2 py-0.5 rounded font-label-md text-[11px]">Developer</span>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant mt-sm">wangfang@proflow.com</p>
+                            </div>
+                            <button class="text-on-surface-variant hover:text-primary transition-colors">
+                                <span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Member Card 4 -->
+                    <div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm hover:border-primary transition-all group">
+                        <div class="flex items-center gap-lg">
+                            <img src="https://openui.fly.dev/openui/64x64.svg?text=ZQ" class="w-16 h-16 rounded-full border-2 border-outline-variant" alt="User Avatar">
+                            <div class="flex-1">
+                                <h4 class="font-headline-md text-on-surface group-hover:text-primary transition-colors">赵强</h4>
+                                <span class="bg-tertiary-container text-on-tertiary-container px-2 py-0.5 rounded font-label-md text-[11px]">Developer</span>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant mt-sm">zhaoqiang@proflow.com</p>
+                            </div>
+                            <button class="text-on-surface-variant hover:text-primary transition-colors">
+                                <span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Member Card 5 -->
+                    <div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm hover:border-primary transition-all group">
+                        <div class="flex items-center gap-lg">
+                            <img src="https://openui.fly.dev/openui/64x64.svg?text=CM" class="w-16 h-16 rounded-full border-2 border-outline-variant" alt="User Avatar">
+                            <div class="flex-1">
+                                <h4 class="font-headline-md text-on-surface group-hover:text-primary transition-colors">陈明</h4>
+                                <span class="bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded font-label-md text-[11px]">QA Engineer</span>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant mt-sm">chenming@proflow.com</p>
+                            </div>
+                            <button class="text-on-surface-variant hover:text-primary transition-colors">
+                                <span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Member Card 6 -->
+                    <div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm hover:border-primary transition-all group">
+                        <div class="flex items-center gap-lg">
+                            <img src="https://openui.fly.dev/openui/64x64.svg?text=LS" class="w-16 h-16 rounded-full border-2 border-outline-variant" alt="User Avatar">
+                            <div class="flex-1">
+                                <h4 class="font-headline-md text-on-surface group-hover:text-primary transition-colors">刘思</h4>
+                                <span class="bg-primary-container text-on-primary-container px-2 py-0.5 rounded font-label-md text-[11px]">Product Manager</span>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant mt-sm">liusi@proflow.com</p>
+                            </div>
+                            <button class="text-on-surface-variant hover:text-primary transition-colors">
+                                <span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TIMELINE SECTION (Hidden by default) -->
+            <section id="tab-timeline" class="tab-content hidden max-w-4xl mx-auto">
+                <div class="timeline-container relative flex flex-col gap-xl">
+                    
+                    <!-- Milestone 1 - Left -->
+                    <div class="relative w-full md:w-1/2 md:pr-12 md:text-right self-start">
+                        <div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm relative">
+                            <div class="absolute top-1/2 -right-14 -translate-y-1/2 hidden md:flex items-center justify-center w-8 h-8 rounded-full bg-green-500 text-white z-10">
+                                <span class="material-symbols-outlined text-[18px]" data-icon="check">check</span>
+                            </div>
+                            <p class="font-label-md text-label-md text-primary mb-xs">2024-09-01</p>
+                            <h4 class="font-headline-md text-on-surface mb-sm">项目启动与需求分析</h4>
+                            <p class="font-body-sm text-body-sm text-on-surface-variant">
+                                确定重构核心目标，完成所有业务线需求调研，并输出初始重构方案文档。
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Milestone 2 - Right -->
+                    <div class="relative w-full md:w-1/2 md:pl-12 self-end">
+                        <div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm relative">
+                            <div class="absolute top-1/2 -left-14 -translate-y-1/2 hidden md:flex items-center justify-center w-8 h-8 rounded-full bg-green-500 text-white z-10">
+                                <span class="material-symbols-outlined text-[18px]" data-icon="check">check</span>
+                            </div>
+                            <p class="font-label-md text-label-md text-primary mb-xs">2024-09-15</p>
+                            <h4 class="font-headline-md text-on-surface mb-sm">技术栈选型与原型设计</h4>
+                            <p class="font-body-sm text-body-sm text-on-surface-variant">
+                                确定使用 React 18 + Tailwind CSS + Vite 架构，并完成核心组件库设计规范。
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Milestone 3 - Left -->
+                    <div class="relative w-full md:w-1/2 md:pr-12 md:text-right self-start">
+                        <div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm relative">
+                            <div class="absolute top-1/2 -right-14 -translate-y-1/2 hidden md:flex items-center justify-center w-8 h-8 rounded-full bg-green-500 text-white z-10">
+                                <span class="material-symbols-outlined text-[18px]" data-icon="check">check</span>
+                            </div>
+                            <p class="font-label-md text-label-md text-primary mb-xs">2024-10-10</p>
+                            <h4 class="font-headline-md text-on-surface mb-sm">基础架构搭建</h4>
+                            <p class="font-body-sm text-body-sm text-on-surface-variant">
+                                完成 CI/CD 流水线配置，集成 Lint、Prettier 及单元测试环境。
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Milestone 4 - Right -->
+                    <div class="relative w-full md:w-1/2 md:pl-12 self-end">
+                        <div class="bg-surface-container-lowest p-lg rounded-xl border border-primary shadow-md relative">
+                            <div class="absolute top-1/2 -left-14 -translate-y-1/2 hidden md:flex items-center justify-center w-8 h-8 rounded-full bg-primary text-white z-10 ring-4 ring-primary-container">
+                                <span class="material-symbols-outlined text-[18px] animate-spin" data-icon="sync">sync</span>
+                            </div>
+                            <p class="font-label-md text-label-md text-primary mb-xs">2024-11-01</p>
+                            <h4 class="font-headline-md text-on-surface mb-sm">核心业务组件重构</h4>
+                            <p class="font-body-sm text-body-sm text-on-surface-variant">
+                                正在进行复杂业务组件的逻辑抽离与样式重塑，目前已完成 70%。
+                            </p>
+                            <span class="inline-block mt-md bg-primary-container text-on-primary-container px-2 py-0.5 rounded text-[11px]">进行中</span>
+                        </div>
+                    </div>
+
+                    <!-- Milestone 5 - Left -->
+                    <div class="relative w-full md:w-1/2 md:pr-12 md:text-right self-start">
+                        <div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm relative opacity-60">
+                            <div class="absolute top-1/2 -right-14 -translate-y-1/2 hidden md:flex items-center justify-center w-8 h-8 rounded-full bg-outline-variant text-white z-10">
+                                <span class="material-symbols-outlined text-[18px]" data-icon="schedule">schedule</span>
+                            </div>
+                            <p class="font-label-md text-label-md text-on-surface-variant mb-xs">2024-12-05</p>
+                            <h4 class="font-headline-md text-on-surface mb-sm">Beta 版本内部测试</h4>
+                            <p class="font-body-sm text-body-sm text-on-surface-variant">
+                                开启全量功能测试，重点关注浏览器兼容性与交互性能。
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Milestone 6 - Right -->
+                    <div class="relative w-full md:w-1/2 md:pl-12 self-end">
+                        <div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm relative opacity-60">
+                            <div class="absolute top-1/2 -left-14 -translate-y-1/2 hidden md:flex items-center justify-center w-8 h-8 rounded-full bg-outline-variant text-white z-10">
+                                <span class="material-symbols-outlined text-[18px]" data-icon="flag">flag</span>
+                            </div>
+                            <p class="font-label-md text-label-md text-on-surface-variant mb-xs">2024-12-31</p>
+                            <h4 class="font-headline-md text-on-surface mb-sm">正式环境全量上线</h4>
+                            <p class="font-body-sm text-body-sm text-on-surface-variant">
+                                完成旧版本下线，切换至全新架构，并进行上线后持续观测。
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <script>
+        function switchTab(tabName) {
+            // Update Tab Styles
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active-tab', 'text-primary', 'border-b-2', 'border-primary');
+                btn.classList.add('text-on-surface-variant');
+            });
+
+            const activeBtn = Array.from(document.querySelectorAll('.tab-btn')).find(btn => btn.innerText.includes(
+                tabName === 'overview' ? '概览' :
+                tabName === 'members' ? '成员' :
+                tabName === 'timeline' ? '时间线' : '任务列表'
+            ));
+            
+            if (activeBtn) {
+                activeBtn.classList.add('active-tab', 'text-primary', 'border-b-2', 'border-primary');
+                activeBtn.classList.remove('text-on-surface-variant');
+            }
+
+            // Show/Hide Content
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            const target = document.getElementById('tab-' + tabName);
+            if (target) {
+                target.classList.remove('hidden');
+            }
+        }
+    </script>
+</body>
+</html></style></head><body></body></html>

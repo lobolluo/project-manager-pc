@@ -6,6 +6,33 @@ import { Input } from '@/components/ui/input'
 import { useSettingsStore } from '@/stores/settings-store'
 import { useState } from 'react'
 
+const NOTIFICATION_ITEMS = [
+  {
+    key: 'email' as const,
+    icon: 'mail',
+    label: 'Email Notifications',
+    description: 'Receive email updates for important activities',
+  },
+  {
+    key: 'taskAssignment' as const,
+    icon: 'assignment_ind',
+    label: 'Task Assignment Alerts',
+    description: 'Get notified when tasks are assigned to you',
+  },
+  {
+    key: 'deadline' as const,
+    icon: 'schedule',
+    label: 'Deadline Reminders',
+    description: 'Reminders before task deadlines approach',
+  },
+  {
+    key: 'projectUpdate' as const,
+    icon: 'update',
+    label: 'Project Updates',
+    description: 'Notifications about project status changes',
+  },
+]
+
 export default function SettingsPage() {
   const settings = useSettingsStore((s) => s.settings)
   const updateSettings = useSettingsStore((s) => s.updateSettings)
@@ -24,108 +51,244 @@ export default function SettingsPage() {
   }
 
   return (
-    <div className="max-w-3xl space-y-6">
-      {/* 个人资料 */}
-      <Card className="border-gray-200">
-        <CardHeader><CardTitle className="text-base">个人资料</CardTitle></CardHeader>
-        <CardContent className="space-y-4">
-          <div className="flex items-center gap-4">
-            <div className="w-16 h-16 rounded-full bg-[#3b5998] flex items-center justify-center text-white text-2xl font-semibold">
-              {username[0]}
-            </div>
-            <Button variant="outline" size="sm">更换头像</Button>
-          </div>
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="text-sm font-medium text-gray-700 block mb-1">用户名</label>
-              <Input value={username} onChange={(e) => setUsername(e.target.value)} />
-            </div>
-            <div>
-              <label className="text-sm font-medium text-gray-700 block mb-1">邮箱</label>
-              <Input value={email} onChange={(e) => setEmail(e.target.value)} />
-            </div>
-          </div>
-          <div className="w-1/2">
-            <label className="text-sm font-medium text-gray-700 block mb-1">角色</label>
-            <Input value={settings.role} disabled />
-          </div>
-          <Button onClick={handleSaveProfile} className="bg-[#3b5998] hover:bg-[#3b5998]/90">保存修改</Button>
-        </CardContent>
-      </Card>
+    <div className="max-w-5xl space-y-8">
+      {/* Page Title */}
+      <div>
+        <h1 className="text-2xl font-semibold text-on-surface">Settings</h1>
+        <p className="mt-1 text-sm text-on-surface-variant">
+          Manage your account preferences and application settings.
+        </p>
+      </div>
 
-      {/* 通知设置 */}
-      <Card className="border-gray-200">
-        <CardHeader><CardTitle className="text-base">通知设置</CardTitle></CardHeader>
-        <CardContent className="space-y-4">
-          {[
-            { key: 'email' as const, label: '邮件通知' },
-            { key: 'taskAssignment' as const, label: '任务分配提醒' },
-            { key: 'deadline' as const, label: '截止日期提醒' },
-            { key: 'projectUpdate' as const, label: '项目更新通知' },
-          ].map((item) => (
-            <div key={item.key} className="flex items-center justify-between">
-              <span className="text-sm text-gray-700">{item.label}</span>
-              <button
-                onClick={() => toggleNotification(item.key)}
-                className={`relative w-11 h-6 rounded-full transition-colors ${
-                  settings.notifications[item.key] ? 'bg-[#3b5998]' : 'bg-gray-300'
-                }`}
+      {/* Two-column layout */}
+      <div className="grid grid-cols-12 gap-6">
+        {/* Main column (8-col) */}
+        <div className="col-span-8 space-y-6">
+          {/* Profile Section */}
+          <Card className="border-outline-variant bg-surface-container-lowest">
+            <CardHeader>
+              <CardTitle className="text-on-surface">Profile</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              {/* Avatar with camera overlay */}
+              <div className="flex items-center gap-6">
+                <div className="relative">
+                  <div className="w-24 h-24 rounded-full bg-primary flex items-center justify-center text-primary-foreground text-3xl font-semibold">
+                    {username[0]}
+                  </div>
+                  <button className="absolute inset-0 w-24 h-24 rounded-full bg-on-surface/40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity cursor-pointer">
+                    <span className="material-symbols-outlined text-white text-2xl">
+                      photo_camera
+                    </span>
+                  </button>
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-on-surface">Profile Photo</p>
+                  <p className="text-xs text-on-surface-variant mt-0.5">
+                    Click the avatar to upload a new photo
+                  </p>
+                </div>
+              </div>
+
+              {/* Form fields */}
+              <div className="space-y-4">
+                <div>
+                  <label className="text-sm font-medium text-on-surface block mb-1.5">
+                    Username
+                  </label>
+                  <Input
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    className="bg-surface-container-lowest border-outline-variant"
+                  />
+                </div>
+                <div>
+                  <label className="text-sm font-medium text-on-surface block mb-1.5">
+                    Role
+                  </label>
+                  <Input
+                    value={settings.role}
+                    disabled
+                    className="bg-surface-container-low border-outline-variant"
+                  />
+                </div>
+                <div>
+                  <label className="text-sm font-medium text-on-surface block mb-1.5">
+                    Email
+                  </label>
+                  <Input
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="bg-surface-container-lowest border-outline-variant"
+                  />
+                </div>
+              </div>
+
+              <Button
+                onClick={handleSaveProfile}
+                className="bg-primary hover:bg-primary/90 text-primary-foreground"
               >
-                <span
-                  className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform ${
-                    settings.notifications[item.key] ? 'translate-x-5' : ''
-                  }`}
-                />
-              </button>
-            </div>
-          ))}
-        </CardContent>
-      </Card>
+                Save Changes
+              </Button>
+            </CardContent>
+          </Card>
 
-      {/* 外观设置 */}
-      <Card className="border-gray-200">
-        <CardHeader><CardTitle className="text-base">外观设置</CardTitle></CardHeader>
-        <CardContent className="space-y-4">
-          <div>
-            <label className="text-sm font-medium text-gray-700 block mb-2">主题</label>
-            <div className="flex gap-3">
-              {(['light', 'dark', 'system'] as const).map((theme) => (
-                <button
-                  key={theme}
-                  onClick={() => updateSettings({ theme })}
-                  className={`px-4 py-2 text-sm rounded-lg border transition-colors ${
-                    settings.theme === theme
-                      ? 'border-[#3b5998] bg-[#3b5998]/10 text-[#3b5998] font-medium'
-                      : 'border-gray-200 text-gray-600 hover:border-gray-300'
-                  }`}
+          {/* Notifications Section */}
+          <Card className="border-outline-variant bg-surface-container-lowest">
+            <CardHeader>
+              <CardTitle className="text-on-surface">Notifications</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-1">
+              {NOTIFICATION_ITEMS.map((item) => (
+                <div
+                  key={item.key}
+                  className="flex items-center justify-between py-3 border-b border-outline-variant last:border-b-0"
                 >
-                  {theme === 'light' ? '浅色' : theme === 'dark' ? '深色' : '跟随系统'}
-                </button>
+                  <div className="flex items-start gap-3">
+                    <span className="material-symbols-outlined text-on-surface-variant mt-0.5">
+                      {item.icon}
+                    </span>
+                    <div>
+                      <p className="text-sm font-medium text-on-surface">{item.label}</p>
+                      <p className="text-xs text-on-surface-variant mt-0.5">{item.description}</p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => toggleNotification(item.key)}
+                    className={`relative w-11 h-6 rounded-full transition-colors shrink-0 ${
+                      settings.notifications[item.key] ? 'bg-primary' : 'bg-surface-container-high'
+                    }`}
+                  >
+                    <span
+                      className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform ${
+                        settings.notifications[item.key] ? 'translate-x-5' : ''
+                      }`}
+                    />
+                  </button>
+                </div>
               ))}
-            </div>
-          </div>
-          <div>
-            <label className="text-sm font-medium text-gray-700 block mb-2">语言</label>
-            <select
-              value={settings.language}
-              onChange={(e) => updateSettings({ language: e.target.value as 'zh-CN' | 'en-US' })}
-              className="px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[#3b5998]"
-            >
-              <option value="zh-CN">中文（简体）</option>
-              <option value="en-US">English</option>
-            </select>
-          </div>
-        </CardContent>
-      </Card>
+            </CardContent>
+          </Card>
+        </div>
 
-      {/* 危险区域 */}
-      <Card className="border-red-200">
-        <CardHeader><CardTitle className="text-base text-red-600">危险区域</CardTitle></CardHeader>
-        <CardContent>
-          <p className="text-sm text-gray-500 mb-3">删除账户后，所有数据将无法恢复。请谨慎操作。</p>
-          <Button variant="destructive">删除账户</Button>
-        </CardContent>
-      </Card>
+        {/* Sidebar column (4-col) */}
+        <div className="col-span-4 space-y-6">
+          {/* Appearance Section */}
+          <Card className="border-outline-variant bg-surface-container-lowest">
+            <CardHeader>
+              <CardTitle className="text-on-surface">Appearance</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-5">
+              {/* Theme Mode */}
+              <div>
+                <label className="text-sm font-medium text-on-surface block mb-2">Theme Mode</label>
+                <div className="space-y-2">
+                  {[
+                    {
+                      value: 'light' as const,
+                      label: 'Light',
+                      preview: (
+                        <div className="w-full h-10 rounded-md bg-white border border-outline-variant overflow-hidden p-1.5 space-y-1">
+                          <div className="h-1.5 w-8 rounded-sm bg-surface-container-high" />
+                          <div className="flex gap-1">
+                            <div className="h-2 flex-1 rounded-sm bg-primary/20" />
+                            <div className="h-2 flex-1 rounded-sm bg-surface-container" />
+                          </div>
+                          <div className="h-1 w-12 rounded-sm bg-surface-container-high" />
+                        </div>
+                      ),
+                    },
+                    {
+                      value: 'dark' as const,
+                      label: 'Dark',
+                      preview: (
+                        <div className="w-full h-10 rounded-md bg-[#1a1c1e] border border-[#44474f] overflow-hidden p-1.5 space-y-1">
+                          <div className="h-1.5 w-8 rounded-sm bg-[#44474f]" />
+                          <div className="flex gap-1">
+                            <div className="h-2 flex-1 rounded-sm bg-[#3b5998]/40" />
+                            <div className="h-2 flex-1 rounded-sm bg-[#2d3133]" />
+                          </div>
+                          <div className="h-1 w-12 rounded-sm bg-[#44474f]" />
+                        </div>
+                      ),
+                    },
+                    {
+                      value: 'system' as const,
+                      label: 'System',
+                      preview: (
+                        <div className="w-full h-10 rounded-md overflow-hidden flex border border-outline-variant">
+                          <div className="w-1/2 bg-white p-1.5 space-y-1 border-r border-outline-variant">
+                            <div className="h-1.5 w-6 rounded-sm bg-surface-container-high" />
+                            <div className="h-1.5 w-full rounded-sm bg-surface-container" />
+                          </div>
+                          <div className="w-1/2 bg-[#1a1c1e] p-1.5 space-y-1">
+                            <div className="h-1.5 w-6 rounded-sm bg-[#44474f]" />
+                            <div className="h-1.5 w-full rounded-sm bg-[#2d3133]" />
+                          </div>
+                        </div>
+                      ),
+                    },
+                  ].map((theme) => (
+                    <button
+                      key={theme.value}
+                      onClick={() => updateSettings({ theme: theme.value })}
+                      className={`w-full text-left p-2.5 rounded-xl border-2 transition-all ${
+                        settings.theme === theme.value
+                          ? 'border-primary bg-primary/5'
+                          : 'border-outline-variant hover:border-outline bg-surface-container-lowest'
+                      }`}
+                    >
+                      {theme.preview}
+                      <p
+                        className={`text-xs mt-1.5 font-medium ${
+                          settings.theme === theme.value ? 'text-primary' : 'text-on-surface-variant'
+                        }`}
+                      >
+                        {theme.label}
+                      </p>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Language */}
+              <div>
+                <label className="text-sm font-medium text-on-surface block mb-1.5">Language</label>
+                <div className="relative">
+                  <select
+                    value={settings.language}
+                    onChange={(e) => updateSettings({ language: e.target.value as 'zh-CN' | 'en-US' })}
+                    className="w-full appearance-none h-9 rounded-lg border border-outline-variant bg-surface-container-lowest px-3 pr-8 text-sm text-on-surface focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all cursor-pointer"
+                  >
+                    <option value="zh-CN">中文（简体）</option>
+                    <option value="en-US">English</option>
+                  </select>
+                  <span className="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-on-surface-variant text-lg pointer-events-none">
+                    expand_more
+                  </span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Danger Zone */}
+          <Card className="border-destructive/40 bg-surface-container-lowest">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-destructive">
+                <span className="material-symbols-outlined">warning</span>
+                Danger Zone
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <p className="text-sm text-on-surface-variant">
+                Once you delete your account, there is no going back. All your data, projects, and
+                tasks will be permanently removed.
+              </p>
+              <Button variant="destructive">Delete Account</Button>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
     </div>
   )
 }

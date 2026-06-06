@@ -21,12 +21,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh-CN" className={`${geistSans.variable} antialiased`}>
-      <body className="bg-[#f5f7fa] min-h-screen">
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body className="bg-background text-on-surface">
         <div className="flex min-h-screen">
           <Sidebar />
-          <div className="flex-1 flex flex-col min-w-0">
+          <div className="flex-1 flex flex-col min-w-0 ml-[260px]">
             <Header />
-            <main className="flex-1 p-6">{children}</main>
+            <main className="flex-1 p-8">{children}</main>
           </div>
         </div>
       </body>
