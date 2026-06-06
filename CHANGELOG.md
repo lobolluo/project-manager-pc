@@ -4,6 +4,39 @@
 
 ---
 
+## v0.2.0 - Stitch UI 还原 (2026-06-07)
+
+### 新增
+
+- MD3 (Material Design 3) 颜色 token 系统（全局 CSS 变量）
+- Material Symbols Outlined 图标字体
+- Inter 字体支持
+- Stitch 设计稿 HTML 归档（10 个文件存入 docs/stitch-designs/）
+- Team 团队页面（成员网格 + 最近协作 + 团队统计卡片）
+- Project Detail 页面 Timeline 标签页（垂直时间线 + 里程碑动画）
+- Project Detail 页面 Members 标签页增强（在线状态 + 最近协作 + 团队统计）
+
+### 变更
+
+- 全局 CSS：从 shadcn 默认 oklch 颜色切换到 MD3 hex 颜色 token
+- 侧边栏：深色(#2c3e50) → 浅色(#eceef1)，添加品牌 logo、组织卡片，移除折叠功能
+- 顶栏：搜索改为胶囊样式，添加帮助按钮和用户信息区
+- Dashboard：4 统计卡片重设计 + 周进度柱状图 + 精选项目蓝色卡片 + 最近活动列表
+- Kanban：任务卡片添加分类彩色左边框，列头使用 Material 图标
+- Settings：改为双栏布局，添加头像上传、主题预览卡片、通知图标
+- Projects 列表：适配 MD3 颜色 token
+
+### 技术决策
+
+| 决策 | 选择 | 原因 |
+|------|------|------|
+| 图标系统 | Material Symbols Outlined | Stitch 设计稿使用，视觉一致 |
+| 颜色系统 | MD3 token | Stitch 设计系统定义的标准 token |
+| 字体 | Inter | Stitch 设计系统指定 |
+| 设计参考 | Stitch HTML 归档 | 保留原始设计稿便于后续对照 |
+
+---
+
 ## v0.1.0 - 基础框架 (2026-06-07)
 
 ### 新增
